@@ -1,12 +1,5 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import "./index.css"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App.jsx';
 
-
-const App = () => (
-<>
-  <h1>Hello React</h1>
-</>
-)
-
-ReactDOM.render(<App />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById('root'));
