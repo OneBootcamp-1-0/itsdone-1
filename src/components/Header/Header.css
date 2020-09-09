@@ -1,0 +1,26 @@
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.toggle__option {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.toggle__option:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.toggle__input:checked + .toggle__option {
+  text-decoration: underline;
+}
+
