@@ -11,8 +11,8 @@ const App = () => {
   return (
     <div className={css.page}>
       <Header />
-      <Board >
-        <Grid/>
+      <Board>
+        <Grid />
       </Board>
       <Footer />
     </div>
