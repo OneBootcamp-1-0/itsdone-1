@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../index.css';
+import './index.css';
 import css from './App.css';
 import Header from './components/Header/Header.jsx';
 import Board from './components/Board/Board.jsx';
