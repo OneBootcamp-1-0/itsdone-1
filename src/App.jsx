@@ -4,14 +4,14 @@ import css from './App.css';
 import Header from './components/Header/Header.jsx';
 import Board from './components/Board/Board.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import Grid from './components/Board/Grid/Grid.jsx';
+import Canban from './components/Board/Canban/Canban.jsx';
 
 const App = () => {
   return (
     <div className={css.page}>
       <Header />
       <Board>
-        <Grid />
+        <Canban />
       </Board>
       <Footer />
     </div>
