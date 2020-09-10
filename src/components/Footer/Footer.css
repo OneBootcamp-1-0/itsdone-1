@@ -1,0 +1,12 @@
+.footer {
+  color: #bdbdbd;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 40px auto 20px;
+  text-align: center;
+}
+
+.footer__link {
+  color: #bdbdbd;
+}
