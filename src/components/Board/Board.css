@@ -1,0 +1,9 @@
+.board {
+  height: fit-content;
+  overflow-x: auto;
+}
+
+.board::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
