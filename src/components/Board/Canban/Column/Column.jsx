@@ -9,8 +9,8 @@ const Column = props => {
   return (
     <div className={isAddNew ? css.column__newCard : ''}>
       {isAddNew
-      ? <NewCard />
-      : <div>
+        ? <NewCard />
+        : <div>
           <h1 className={css.column__title}>{props.title}</h1>
           <div className={css.column__cards}>
             <Card />
