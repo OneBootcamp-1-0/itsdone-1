@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import css from './Grid.css';
 import Card from '../Card/Card.jsx';
 
