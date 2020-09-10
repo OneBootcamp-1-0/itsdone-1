@@ -1,8 +1,9 @@
 import React from 'react';
+import css from './Board.css';
 
 const Board = props => {
   return (
-    <main>
+    <main className={css.board}>
       {props.children}
     </main>
   );
