@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './Column.css';
-import CanbanCard from '../../Card/CanbanCard.jsx';
 import NewCard from '../../NewCard/NewCard.jsx';
 
 const Column = props => {
@@ -13,10 +12,7 @@ const Column = props => {
         : <div>
           <h1 className={css.column__title}>{props.title}</h1>
           <div className={css.column__cards}>
-            <CanbanCard />
-            <CanbanCard /> 
-            <CanbanCard />
-            <CanbanCard />
+            {props.children}
           </div>
         </div>}
     </div>
