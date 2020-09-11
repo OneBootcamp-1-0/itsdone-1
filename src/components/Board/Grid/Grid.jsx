@@ -1,16 +1,18 @@
 import React from 'react';
 import css from './Grid.css';
-import Card from '../Card/Card.jsx';
+import GridCard from '../Card/GridCard.jsx';
+import NewCard from '../NewCard/NewCard.jsx';
 
 const Grid = () => {
   return (
     <div className={css.grid}>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <NewCard />
+      <GridCard />
+      <GridCard />
+      <GridCard />
+      <GridCard />
+      <GridCard />
+      <GridCard />
     </div>
   );
 };
