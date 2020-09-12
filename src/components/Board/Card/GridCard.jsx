@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from './Card.jsx';
 
-const GridCard = () => {
+const GridCard = props => {
   return (
-    <Card isButton={true} />
+    <Card {...props} isButton={true} />
   )
 }
 

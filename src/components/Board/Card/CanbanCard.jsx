@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from './Card.jsx';
 
-const CanbanCard = () => {
+const CanbanCard = props => {
   return (
-    <Card isButton={false} />
+    <Card {...props} isButton={false} />
   )
 }
 
