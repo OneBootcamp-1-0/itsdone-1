@@ -3,7 +3,41 @@
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(39, 174, 96, 0.2);
-  height: 230px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 235px;
+  padding: 15px;
   width: 200px;
+}
+
+.card__date {
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.card__note {
+  margin: 0;
+  margin-bottom: auto;
+}
+
+.card__btn {
+  font-family: "Roboto";
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: auto;
+  margin-right: auto;
+  outline: none;
+  padding: 0;
+  padding-top: 10px;
+  text-transform: uppercase;
 }

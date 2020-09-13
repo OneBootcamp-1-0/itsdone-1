@@ -4,14 +4,20 @@ import css from './App.css';
 import Header from './components/Header/Header.jsx';
 import Board from './components/Board/Board.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import Canban from './components/Board/Canban/Canban.jsx';
 import Grid from './components/Board/Grid/Grid.jsx';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 const App = () => {
   return (
     <div className={css.page}>
       <Header />
       <Board>
-        <Grid />
+        <Switch>
+          <Route exact path="/canban" component={Canban} />
+          <Route exact path="/grid" component={Grid} />
+          <Route path="/" render={() => <Redirect to="/grid" />} />
+        </Switch>
       </Board>
       <Footer />
     </div>
