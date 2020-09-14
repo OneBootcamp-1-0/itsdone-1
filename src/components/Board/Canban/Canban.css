@@ -4,3 +4,7 @@
   grid-auto-flow: column;
   justify-content: start;
 }
+
+.canban__addNewCard {
+  padding-top: 36.2px;
+}
