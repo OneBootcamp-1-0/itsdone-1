@@ -24,7 +24,7 @@ const datesList = [
 ];
 
 const getRandomElementFromArray = (arr) => {
-  const randomNumber = Math.floor(Math.random() * (arr.length - 0) + 0);
+  const randomNumber = Math.floor(Math.random() * arr.length);
 
   return arr[randomNumber];
 };
