@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react';
 import css from './Grid.css';
 import GridCard from '../Card/GridCard.jsx';
 import NewCard from '../NewCard/NewCard.jsx';
-import { getCards } from '../../../data.js';
 
-const Grid = () => {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    setCards(getCards());
-  }, []);
+const Grid = props => {
+  const { cards } = props;
 
   return (
     <div className={css.grid}>
