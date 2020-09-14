@@ -3,7 +3,7 @@ import css from './Column.css';
 import CanbanCard from '../../Card/CanbanCard.jsx';
 
 const Column = props => {
-  const { status, title } = props;
+  const { status, title, onCardEdit } = props;
 
   return (
     <div>
@@ -11,7 +11,7 @@ const Column = props => {
       <div className={css.column__cards}>
         {props.cards.map((card, i) => {
           if (card.status === status) {
-            return <CanbanCard key={i} date={card.date} title={card.title} text={card.text} />
+            return <CanbanCard onCardEdit={onCardEdit} key={i} id={card.id} date={card.date} title={card.title} text={card.text} />
           }
         })}
       </div>
