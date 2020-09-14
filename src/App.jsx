@@ -11,8 +11,6 @@ import { getColumns } from './data.js';
 
 const App = props => {
   const { onCardEdit, cards } = props;
-  const [localCards, setLocalCards] = useState(cards);
-  setLocalCards(cards);
 
   return (
     <div className={css.page}>
