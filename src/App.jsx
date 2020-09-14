@@ -7,15 +7,18 @@ import Footer from './components/Footer/Footer.jsx';
 import Canban from './components/Board/Canban/Canban.jsx';
 import Grid from './components/Board/Grid/Grid.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { getColumns, getCards } from './data.js';
 
 const App = () => {
+  const cards = getCards();
+
   return (
     <div className={css.page}>
       <Header />
       <Board>
         <Switch>
-          <Route exact path="/canban" component={Canban} />
-          <Route exact path="/grid" component={Grid} />
+          <Route exact path="/canban" render={() => <Canban columns={getColumns()} cards={cards}/>} />
+          <Route exact path="/grid" render={() => <Grid cards={cards} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>

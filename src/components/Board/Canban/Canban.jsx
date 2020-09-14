@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Column from './Column/Column.jsx';
 import css from './Canban.css';
+import NewCard from '../NewCard/NewCard.jsx';
 
-const Canban = () => {
+const Canban = props => {
+  const { cards, columns } = props;
+
   return (
     <div className={css.canban}>
-      <Column title='TODO' />
-      <Column title='IN PROGRESS' />
-      <Column title='IN TESTING' />
-      <Column title='DONE' />
-      <Column type='newCard' />
+      {columns.map((column, i) => <Column cards={cards} key={i} status={column.status} title={column.title} />)}
+      <div className={css.canban__addNewCard}>
+        <NewCard />
+      </div>
     </div>
   );
 };
