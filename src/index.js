@@ -15,12 +15,17 @@ const onCardEdit = (cardId, cardIsDone) => {
   const foundCard = state.cards.find(card => {
     return card.id === cardId;
   });
-
   foundCard.isDone = cardIsDone;
+  
+  rerenderDOM(state.cards);
 };
 
-ReactDOM.render(
-  <Router history={history}>
-    <App cards={state.cards} onCardEdit={onCardEdit} />
-  </Router>
-  , document.getElementById('root'));
+const rerenderDOM = (cards) => {
+  ReactDOM.render(
+    <Router history={history}>
+      <App cards={cards} onCardEdit={onCardEdit} />
+    </Router>
+    , document.getElementById('root'));
+};
+
+rerenderDOM(state.cards);
