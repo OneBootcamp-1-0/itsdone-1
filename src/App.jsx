@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import css from './App.css';
+import './App.css';
 import Header from './components/Header/Header.jsx';
 import Board from './components/Board/Board.jsx';
 import Footer from './components/Footer/Footer.jsx';
@@ -13,7 +13,7 @@ const App = props => {
   const { onCardEdit, cards } = props;
 
   return (
-    <div className={css.page}>
+    <div className="page">
       <Header />
       <Board>
         <Switch>
