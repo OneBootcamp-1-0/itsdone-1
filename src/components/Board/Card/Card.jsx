@@ -7,7 +7,7 @@ const Card = props => {
   const onBtnClick = e => {
     const card = e.target.closest('.card');
 
-    onCardEdit(Number(card.dataset.id), card.dataset.done === 'true' ? 'qweqew' : 'weqweqefsdfasf');
+    onCardEdit(Number(card.dataset.id), card.dataset.done === 'true' ? false : true);
   };
 
   return (
