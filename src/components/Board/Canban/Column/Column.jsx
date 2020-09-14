@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import css from './Column.css';
-import NewCard from '../../NewCard/NewCard.jsx';
+import CanbanCard from '../../Card/CanbanCard.jsx';
+import { getCards } from '../../../../data.js';
 
 const Column = props => {
-  const isAddNew = props.type === 'newCard';
+  const { status, title } = props;
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    setCards(getCards());
+  }, []);
 
   return (
-    <div className={isAddNew ? css.column__newCard : null}>
-      {isAddNew
-        ? <NewCard />
-        : <div>
-          <h1 className={css.column__title}>{props.title}</h1>
-          <div className={css.column__cards}>
-            {props.children}
-          </div>
-        </div>}
+    <div>
+      <h1 className={css.column__title}>{title}</h1>
+      <div className={css.column__cards}>
+        {cards.map((card, i) => {
+          if (card.status === status) {
+            return <CanbanCard key={i} date={card.date} title={card.title} text={card.text} />
+          }
+        })}
+      </div>
     </div>
   );
 };
