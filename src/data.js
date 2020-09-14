@@ -30,8 +30,9 @@ const getRandomElementFromArray = (arr) => {
 };
 
 export const getCards = (quantity = 20) => {
-  return Array.from({ length: quantity }).map(() => {
+  return Array.from({ length: quantity }).map((_, i) => {
     return {
+      id: i,
       date: getRandomElementFromArray(datesList),
       title: getRandomElementFromArray(titlesList),
       text: getRandomElementFromArray(textsList),
