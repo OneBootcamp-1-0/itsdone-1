@@ -16,11 +16,11 @@ const onCardEdit = (cardId, cardIsDone) => {
     return card.id === cardId;
   });
   foundCard.isDone = cardIsDone;
-  
-  rerenderDOM(state.cards);
+
+  renderDOM(state.cards);
 };
 
-const rerenderDOM = (cards) => {
+const renderDOM = (cards) => {
   ReactDOM.render(
     <Router history={history}>
       <App cards={cards} onCardEdit={onCardEdit} />
@@ -28,4 +28,4 @@ const rerenderDOM = (cards) => {
     , document.getElementById('root'));
 };
 
-rerenderDOM(state.cards);
+renderDOM(state.cards);
