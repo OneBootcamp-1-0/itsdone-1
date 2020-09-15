@@ -24,14 +24,15 @@ const datesList = [
 ];
 
 const getRandomElementFromArray = (arr) => {
-  const randomNumber = Math.floor(Math.random() * (arr.length - 0) + 0);
+  const randomNumber = Math.floor(Math.random() * arr.length);
 
   return arr[randomNumber];
 };
 
 export const getCards = (quantity = 20) => {
-  return Array.from({ length: quantity }).map(() => {
+  return Array.from({ length: quantity }).map((_, i) => {
     return {
+      id: i,
       date: getRandomElementFromArray(datesList),
       title: getRandomElementFromArray(titlesList),
       text: getRandomElementFromArray(textsList),
