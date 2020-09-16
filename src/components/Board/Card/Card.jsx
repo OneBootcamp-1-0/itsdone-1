@@ -28,42 +28,6 @@ const Card = props => {
       {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
     </div>
   );
-
-  render() {
-    return (
-      <div>
-        <Card onClick={onClick} />
-      </div>
-    );
-    let component = <EditCard />;
-  };
 };
-
-const onClick = () => {
-
-}
-
-const onEdit = () => {
-  card.onClick(e => {
-    if (setIsEditMode) {
-      return editCard
-    }
-  })
-}
-
-
-const EditCard = () => {
-  return (
-  <div id={id} draggable={true} onDragStart={onDragStart} ref={cardRef} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
-    <input type='date' className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{date}</input>
-    <div className={css.card__note_wrapper}>
-      <input type='text' className={css.card__note_shadow}></input>
-      <textarea cols="15" rows="4" className={`${css.card__note} ${isDone ? css.card__done : ''}`}>{text}</textarea>
-    </div>
-    {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
-  </div>
-  );
-}
-
 
 export default Card;
