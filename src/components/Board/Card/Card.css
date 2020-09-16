@@ -3,6 +3,7 @@
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(39, 174, 96, 0.2);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   height: 235px;
@@ -50,6 +51,10 @@
   margin-bottom: auto;
 }
 
+.card__edit_note {
+  height: 80px;
+}
+
 .card__btn {
   font-family: "Roboto";
   background-color: transparent;
@@ -63,4 +68,18 @@
   padding: 0;
   padding-top: 10px;
   text-transform: uppercase;
+}
+
+input,
+textarea {
+  border: 1px solid #e0e0e0;
+  font: inherit;
+  padding: 5px;
+  max-width: 100%;
+  resize: none;
+}
+
+input:hover,
+input:focus {
+  box-shadow: 0px 0px 10px rgba(39, 174, 96, 0.2);
 }
