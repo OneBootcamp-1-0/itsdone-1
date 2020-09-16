@@ -33,7 +33,7 @@
 }
 
 .card__note_wrapper {
-  height: 100%;
+  height: 75px;
   overflow-y: hidden;
   position: relative;
 }

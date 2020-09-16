@@ -7,15 +7,24 @@ import { getCards } from './data.js';
 
 const history = createBrowserHistory();
 
-const state = {
+let state = {
   cards: getCards(),
 };
 
-const onCardEdit = (cardId, cardIsDone) => {
-  const foundCard = state.cards.find(card => {
+const onCardEdit = (cardId, newCardData) => {
+  let foundCard = state.cards.find(card => {
     return card.id === cardId;
   });
-  foundCard.isDone = cardIsDone;
+
+  state = {
+    ...state,
+    cards: state.cards.map(card => {
+      if (card.id === foundCard.id) {
+        return {...card, ...newCardData}
+      }
+      return card
+    })
+  };
 
   renderDOM(state.cards);
 };
