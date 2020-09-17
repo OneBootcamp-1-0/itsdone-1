@@ -21,8 +21,8 @@ const onCardEdit = (cardId, newCardData) => {
     cards: state.cards.map(card => {
       if (card.id === foundCard.id) {
         return {...card, ...newCardData}
-      }
-      return card
+      };
+      return card;
     })
   };
 
@@ -34,7 +34,8 @@ const renderDOM = (cards) => {
     <Router history={history}>
       <App cards={cards} onCardEdit={onCardEdit} />
     </Router>
-    , document.getElementById('root'));
+    , document.getElementById('root')
+  );
 };
 
 renderDOM(state.cards);
