@@ -12,7 +12,7 @@ const Column = props => {
     const cardId = e.dataTransfer.getData('card_id');
 
     if (cardId) {
-    onCardEdit(Number(cardId), {status: status});
+      onCardEdit(Number(cardId), {status: status});
     }
   }
 
