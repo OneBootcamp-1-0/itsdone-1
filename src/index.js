@@ -12,7 +12,7 @@ let state = {
 };
 
 const onCardEdit = (cardId, newCardData) => {
-  let foundCard = state.cards.find(card => {
+  const foundCard = state.cards.find(card => {
     return card.id === cardId;
   });
 
