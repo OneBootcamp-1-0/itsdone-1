@@ -19,10 +19,7 @@ const onCardEdit = (cardId, newCardData) => {
   });
 
   state.cards = state.cards.map(card => {
-    if (card.id === foundCard.id) {
-      return { ...card, ...newCardData }
-    }
-    return card;
+    return card.id === foundCard.id ? { ...card, ...newCardData } : card;
   });
 
   renderDOM(state);
