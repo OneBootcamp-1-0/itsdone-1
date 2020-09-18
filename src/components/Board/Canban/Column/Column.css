@@ -6,8 +6,12 @@
 }
 
 .column__cards {
-  display: grid;
+  display: flex;
   row-gap: 25px;
+  flex-direction: column;
+  justify-content: start;
+  min-height: calc(100% + 300px);
+  width: 200px;
 }
 
 .column__newCard {
