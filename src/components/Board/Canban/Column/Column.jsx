@@ -3,7 +3,6 @@ import css from './Column.css';
 import CanbanCard from '../../Card/CanbanCard.jsx';
 import EditCard from '../../Card/EditCard.jsx';
 
-
 const Column = props => {
   const { status, title, onCardEdit } = props;
 
