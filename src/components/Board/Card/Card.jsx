@@ -2,10 +2,11 @@ import React from 'react';
 import css from './Card.css';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, draggable } = props;
+  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, draggable, status } = props;
 
   const onBtnClick = () => {
-    onCardEdit(id, {isDone: !isDone});
+    const isDone = !isDone;
+    onCardEdit(id, {isDone: isDone, status: isDone ? 'done' : status});
   };
 
   const onCardClick = e => {
