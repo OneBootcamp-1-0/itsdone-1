@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App.jsx';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { getCards } from './data.js';
 
 const history = createBrowserHistory();
 
+const getJsonData = () => fetch('/src/data.json').then(res => res.json());
+
 let state = {
-  cards: getCards(),
+  columns: [],
+  cards: []
 };
 
 const onCardEdit = (cardId, newCardData) => {
@@ -16,26 +18,24 @@ const onCardEdit = (cardId, newCardData) => {
     return card.id === cardId;
   });
 
-  state = {
-    ...state,
-    cards: state.cards.map(card => {
-      if (card.id === foundCard.id) {
-        return {...card, ...newCardData}
-      };
-      return card;
-    })
-  };
+  state.cards = state.cards.map(card => {
+    return card.id === foundCard.id ? { ...card, ...newCardData } : card;
+  });
 
-  renderDOM(state.cards);
+  renderDOM(state);
 };
 
-const renderDOM = (cards) => {
+const renderDOM = (state) => {
   ReactDOM.render(
     <Router history={history}>
-      <App cards={cards} onCardEdit={onCardEdit} />
+      <App cards={state.cards} columns={state.columns} onCardEdit={onCardEdit} />
     </Router>
     , document.getElementById('root')
   );
 };
 
-renderDOM(state.cards);
+getJsonData()
+  .then(data => {
+    state = data;
+    renderDOM(state);
+  });
