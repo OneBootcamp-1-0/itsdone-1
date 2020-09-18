@@ -2,7 +2,7 @@ import React from 'react';
 import css from './Card.css';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, onCardEdit, setIsEdit } = props;
+  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard } = props;
 
   const onBtnClick = () => {
     onCardEdit(id, {isDone: !isDone});
@@ -10,7 +10,7 @@ const Card = props => {
 
   const onCardClick = e => {
     if (e.target.closest('div[data-card=true]') && !e.target.closest('button')) {
-      setIsEdit({
+      setEditCard({
         id: id,
         isEdit: true
       });
@@ -22,7 +22,7 @@ const Card = props => {
     e.dataTransfer.setData('card_id', e.target.id);
   }
 
-return <div data-card={true} id={id} onClick={onCardClick} draggable={true} onDragStart={onDragStart} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
+  return <div data-card={true} id={id} onClick={onCardClick} draggable={true} onDragStart={onDragStart} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
       <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{date}</p>
       <h2 className={`${css.card__title} ${isDone ? css.card__done : ''}`}>{title}</h2>
       <div className={css.card__note_wrapper}>
