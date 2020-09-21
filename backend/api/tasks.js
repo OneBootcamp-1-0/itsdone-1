@@ -24,6 +24,7 @@ router.post('/:id', (req, res) => {
     const newTask = req.body;
     const jsonData = fs.readFileSync(dataPath);
     const data = JSON.parse(jsonData);
+
     data.tasks = [...data.tasks, newTask];
 
     fs.writeFileSync(dataPath, JSON.stringify(data));
@@ -41,6 +42,7 @@ router.patch('/:id', (req, res) => {
     const newTask = req.body;
     const jsonData = fs.readFileSync(dataPath);
     const data = JSON.parse(jsonData);
+
     data.tasks = data.tasks.map(task => {
       return task.id === Number(req.params.id) ? newTask : task;
     });
@@ -54,6 +56,5 @@ router.patch('/:id', (req, res) => {
     });
   }
 });
-
 
 module.exports = router;
