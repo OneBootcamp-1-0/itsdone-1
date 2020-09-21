@@ -1,14 +1,15 @@
 const { Router } = require('express');
 const fs = require('fs');
 
+const dataPath = 'backend/data.json';
 const router = Router();
 
 router.get('/', (req, res) => {
   try {
-    const jsonData = fs.readFileSync(`backend/data.json`);
-    const data = JSON.parse(jsonData);
+    const jsonData = fs.readFileSync(dataPath);
+    const tasks = JSON.parse(jsonData).tasks;
 
-    res.status(200).json(data.tasks);
+    res.status(200).json(tasks);
   } catch (err) {
     console.error(err);
 
