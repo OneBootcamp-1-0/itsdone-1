@@ -19,17 +19,18 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
   try {
     const newTask = req.body;
     const jsonData = fs.readFileSync(dataPath);
     const data = JSON.parse(jsonData);
+    const tasks = data.tasks;
 
-    data.tasks = [...data.tasks, newTask];
+    tasks.push({...newTask, id: tasks.length});
 
     fs.writeFileSync(dataPath, JSON.stringify(data));
 
-    res.status(200).json(data.tasks);
+    res.status(200).json(tasks);
   } catch (err) {
     res.status(500).json({
       message: 'Error'
