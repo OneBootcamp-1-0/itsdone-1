@@ -11,8 +11,6 @@ router.get('/', (req, res) => {
 
     res.status(200).json(tasks);
   } catch (err) {
-    console.error(err);
-
     res.status(500).json({
       message: 'Error'
     });
@@ -30,7 +28,10 @@ router.post('/', (req, res) => {
 
     fs.writeFileSync(dataPath, JSON.stringify(data));
 
-    res.status(200).json(tasks);
+    res.status(201).json({
+      message: 'New task successfully created',
+      tasks: tasks
+    });
   } catch (err) {
     res.status(500).json({
       message: 'Error'
@@ -50,7 +51,10 @@ router.patch('/:id', (req, res) => {
 
     fs.writeFileSync(dataPath, JSON.stringify(data));
 
-    res.status(200).json(data.tasks);
+    res.status(200).json({
+      message: 'Task successfully updated',
+      tasks: data.tasks
+    });
   } catch (err) {
     res.status(500).json({
       message: 'Error'
