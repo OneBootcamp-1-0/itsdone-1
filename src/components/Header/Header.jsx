@@ -11,22 +11,28 @@ const Header = (props) => {
   const [showCompletedBtn, setShowCompletedBtn] = useState(true);
 
   const onGridLinkClick = () => {
-    if (activeLink === 'canban') {
+    if (activeLink === 'canban' || activeLink === 'schedule') {
       history.push('/grid');
       setActiveLink('grid');
     }
   };
 
   const onCanbanLinkClick = () => {
-    if (activeLink === 'grid') {
+    if (activeLink === 'grid' || activeLink === 'schedule') {
       history.push('/canban');
       setActiveLink('canban');
     }
   };
 
+  const onScheduleLinkClick = () => {
+    if (activeLink === 'grid' || activeLink === 'canban') {
+      history.push('/schedule');
+      setActiveLink('schedule');
+    }
+  };
+
   const onButtonShowClick = () => {
     setShowCompletedBtn(!showCompletedBtn);
-
     setShowAll(!showCompletedBtn);
   };
 
@@ -39,7 +45,7 @@ const Header = (props) => {
       <div>
         <NavLink data-active-link={activeLink === 'grid' ? true : false} onClick={onGridLinkClick} className={`${css.nav_link} ${css.nav_link_active}`} to='/grid'>Grid</NavLink>
         <NavLink data-active-link={activeLink === 'canban' ? true : false} onClick={onCanbanLinkClick} className={css.nav_link} to='/canban'>Canban</NavLink>
-        <NavLink data-active-link={activeLink === 'schedule' ? true : false} onClick={onCanbanLinkClick} className={css.nav_link} to='/schedule'>Schedule</NavLink>
+        <NavLink data-active-link={activeLink === 'schedule' ? true : false} onClick={onScheduleLinkClick} className={css.nav_link} to='/schedule'>Schedule</NavLink>
       </div>
     </header>
   );
