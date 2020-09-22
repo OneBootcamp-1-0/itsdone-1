@@ -24,7 +24,7 @@ const App = props => {
         <Switch>
           <Route exact path="/canban" render={() => <Canban onCardEdit={onCardEdit} columns={columns} cards={cards}/>} />
           <Route exact path="/grid" render={() => <Grid onCardEdit={onCardEdit} cards={showAll ? cards : filterDoneCards()} />} />
-          <Route exact path="/schedule" render={() => <Schedule onCardEdit={onCardEdit} blocks={blocks} cards={cards}/>} />
+          <Route exact path="/schedule" render={() => <Schedule onCardEdit={onCardEdit} blocks={blocks} cards={showAll ? cards : filterDoneCards()}/>} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
