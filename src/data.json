@@ -1,4 +1,21 @@
 {
+  "blocks": [
+    {
+      "title": "NO DATE"
+    },
+    {
+      "title": "TODAY"
+    },
+    {
+      "title": "LATER THIS WEEK"
+    },
+    {
+      "title": "LATER THIS MONTH"
+    },
+    {
+      "title": "UPCOMING MONTHS"
+    }
+  ],
   "columns": [
     {
       "status": "toDo",
