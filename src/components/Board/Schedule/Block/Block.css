@@ -1,0 +1,11 @@
+.block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.block__title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding-left: 10px;
+}
