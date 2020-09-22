@@ -40,7 +40,7 @@ export const requestTasks = () => {
   return dispatch => {
     tasksAPI
       .getTasks()
-      .then(tasks => dispatch(action.getTasks(tasks)));
+      .then(tasks => dispatch(actions.setTasks(tasks)));
   };
 };
 
@@ -48,7 +48,7 @@ export const addTask = task => {
   return dispatch => {
     tasksAPI
       .addTask(task)
-      .then(newTask => dispatch(action.addTask(newTask)));
+      .then(newTask => dispatch(actions.addTask(newTask)));
   };
 };
 
@@ -56,7 +56,7 @@ export const updateTask = task => {
   return dispatch => {
     tasksAPI
       .updateTask(task)
-      .then(updatedTask => dispatch(action.updateTask(updatedTask)));
+      .then(updatedTask => dispatch(actions.updateTask(updatedTask)));
   };
 };
 
