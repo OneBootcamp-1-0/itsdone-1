@@ -4,7 +4,7 @@ import Card from './Card.jsx';
 const CanbanCard = props => {
 
   return (
-    <Card draggable={true} isButton={false} {...props}/>
+    <Card {...props} draggable={true} isButton={false} />
   )
 };
 
