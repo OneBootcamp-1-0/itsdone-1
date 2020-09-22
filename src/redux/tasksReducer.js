@@ -37,7 +37,7 @@ export const actions = {
 
 // Thunks
 export const requestTasks = () => {
-  return async dispatch => {
+  return dispatch => {
     tasksAPI
       .getTasks()
       .then(tasks => dispatch(action.getTasks(tasks)));
@@ -45,7 +45,7 @@ export const requestTasks = () => {
 };
 
 export const addTask = task => {
-  return async dispatch => {
+  return dispatch => {
     tasksAPI
       .addTask(task)
       .then(newTask => dispatch(action.addTask(newTask)));
@@ -53,7 +53,7 @@ export const addTask = task => {
 };
 
 export const updateTask = task => {
-  return async dispatch => {
+  return dispatch => {
     tasksAPI
       .updateTask(task)
       .then(updatedTask => dispatch(action.updateTask(updatedTask)));
