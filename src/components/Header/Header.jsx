@@ -4,11 +4,11 @@ import logo from '../../img/logo.svg';
 import { NavLink, useHistory } from 'react-router-dom';
 
 const Header = (props) => {
-  const {setHideCompleted} = props;
+  const { setShowAll } = props;
 
   const history = useHistory();
   const [ activeLink, setActiveLink ] = useState(history.location.pathname.slice(1) || 'grid');
-  const [showCompletedBtn, setShowCompletedBtn] = useState(false);
+  const [showCompletedBtn, setShowCompletedBtn] = useState(true);
 
   const onGridLinkClick = () => {
     if (activeLink === 'canban') {
@@ -26,7 +26,8 @@ const Header = (props) => {
 
   const onButtonShowClick = () => {
     setShowCompletedBtn(!showCompletedBtn);
-    setHideCompleted(!showCompletedBtn);
+
+    setShowAll(!showCompletedBtn);
   };
 
   return (

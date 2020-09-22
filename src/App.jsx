@@ -9,16 +9,20 @@ import Grid from './components/Board/Grid/Grid.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 const App = props => {
-  const { onCardEdit, cards, columns } = props;
-  const [hideCompleted, setHideCompleted] = useState(false);
+  const { onCardEdit, cards, columns} = props;
+  const [showAll, setShowAll] = useState(true);
+
+  const filterDoneCards = () => {
+    return cards.filter(card => !card.isDone);
+  };
 
   return (
     <div className={css.page}>
-      <Header setHideCompleted={setHideCompleted}/>
+      <Header setShowAll={setShowAll}/>
       <Board>
         <Switch>
           <Route exact path="/canban" render={() => <Canban onCardEdit={onCardEdit} columns={columns} cards={cards}/>} />
-          <Route exact path="/grid" render={() => <Grid hideCompleted={hideCompleted} onCardEdit={onCardEdit} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid onCardEdit={onCardEdit} cards={showAll ? cards : filterDoneCards()} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
