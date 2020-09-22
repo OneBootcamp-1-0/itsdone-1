@@ -9,14 +9,14 @@ const tasksAPI = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task)
-    }).then(res => res.json());
+    }).then(res => res.json()).then(data => data.tasks);
   },
   updateTask: task => {
-    return fetch(`baseURL${task.id}`, {
+    return fetch(`${baseURL}${task.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task)
-    }).then(res => res.json());
+    }).then(res => res.json()).then(data => data.tasks);
   }
 };
 
