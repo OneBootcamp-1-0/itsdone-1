@@ -1,6 +1,4 @@
 .grid {
-  grid-column-gap: 40px;
   display: flex;
   flex-wrap: wrap;
-  grid-row-gap: 30px;
 }
