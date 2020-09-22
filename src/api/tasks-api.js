@@ -1,4 +1,4 @@
-export const tasksAPI = {
+const tasksAPI = {
   getTasks: () => {
     return fetch('http://localhost:3000/tasks').then(res => res.json());
   },
@@ -17,3 +17,5 @@ export const tasksAPI = {
     }).then(res => res.json());
   }
 };
+
+export default taskskAPI;
