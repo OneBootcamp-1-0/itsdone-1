@@ -10,7 +10,7 @@ import Grid from './components/Board/Grid/Grid.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 const App = props => {
-  const { onCardEdit, cards, columns} = props;
+  const { onCardEdit, cards, columns, blocks } = props;
   const [showAll, setShowAll] = useState(true);
 
   const filterDoneCards = () => {
