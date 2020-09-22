@@ -7,8 +7,8 @@
     "eslint": "eslint src/**/*.{js,jsx}",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open --mode development --history-api-fallback",
-    "backendStart": "node backend/index.js",
-    "backendDevStart": "nodemon backend/index.js"
+    "start.backend": "node backend/index.js",
+    "start.backend.dev": "nodemon backend/index.js"
   },
   "repository": {
     "type": "git",
