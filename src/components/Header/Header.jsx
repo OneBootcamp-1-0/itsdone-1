@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import css from './Header.css';
 import logo from '../../img/logo.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const Header = () => {
-  const [ activeLink, setActiveLink ] = useState('grid');
+  const history = useHistory();
+  const [ activeLink, setActiveLink ] = useState(history.location.pathname.slice(1) || 'grid');
 
   const onGridLinkClick = () => {
     if (activeLink === 'canban') {
+      history.push('/grid');
       setActiveLink('grid');
     }
   };
 
   const onCanbanLinkClick = () => {
     if (activeLink === 'grid') {
+      history.push('/canban');
       setActiveLink('canban');
     }
   };

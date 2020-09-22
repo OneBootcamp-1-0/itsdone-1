@@ -18,8 +18,14 @@ const onCardEdit = (cardId, newCardData) => {
     return card.id === cardId;
   });
 
+  const newCard = newCardData;
+
+  if (!newCardData.status) {
+    newCard.status = newCard.isDone ? 'done' : 'toDo';
+  }
+
   state.cards = state.cards.map(card => {
-    return card.id === foundCard.id ? { ...card, ...newCardData } : card;
+    return card.id === foundCard.id ? { ...card, ...newCard } : card;
   });
 
   renderDOM(state);
