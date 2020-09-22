@@ -1,0 +1,6 @@
+.schedule {
+  display: grid;
+  grid-row-gap: 50px;
+  grid-auto-flow: row;
+  justify-content: start;
+}

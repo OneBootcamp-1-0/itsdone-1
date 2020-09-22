@@ -39,6 +39,7 @@ const Header = (props) => {
       <div>
         <NavLink data-active-link={activeLink === 'grid' ? true : false} onClick={onGridLinkClick} className={`${css.nav_link} ${css.nav_link_active}`} to='/grid'>Grid</NavLink>
         <NavLink data-active-link={activeLink === 'canban' ? true : false} onClick={onCanbanLinkClick} className={css.nav_link} to='/canban'>Canban</NavLink>
+        <NavLink data-active-link={activeLink === 'schedule' ? true : false} onClick={onCanbanLinkClick} className={css.nav_link} to='/schedule'>Schedule</NavLink>
       </div>
     </header>
   );
