@@ -10,29 +10,20 @@ const initialState = {
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_TASKS: {
-      return { ...state, tasks: action.tasks };
-    }
-    case UPDATE_TASK: {
-      return {
-        ...state,
-        tasks: state.tasks.map(task => task.id === action.updatedTask.id ? action.updatedTask : task)
-      };
-    }
-    case ADD_TASK: {
-      return { ...state, tasks: [...tasks, action.newTask] }
-    }
-    default: {
+    case SET_TASKS:
+    case UPDATE_TASK:
+    case ADD_TASK:
+      return { ...state, tasks: action.tasks }
+    default:
       return state;
-    }
   }
 };
 
 // Action creators
 export const actions = {
-  addTask: newTask => ({ type: ADD_TASK, newTask }),
+  addTask: tasks => ({ type: ADD_TASK, tasks }),
   setTasks: tasks => ({ type: SET_TASKS, tasks }),
-  updateTask: updatedTask => ({ type: UPDATE_TASK, updatedTask })
+  updateTask: tasks => ({ type: UPDATE_TASK, tasks })
 };
 
 // Thunks
@@ -48,7 +39,7 @@ export const addTask = task => {
   return dispatch => {
     tasksAPI
       .addTask(task)
-      .then(newTask => dispatch(actions.addTask(newTask)));
+      .then(tasks => dispatch(actions.addTask(tasks)));
   };
 };
 
@@ -56,7 +47,7 @@ export const updateTask = task => {
   return dispatch => {
     tasksAPI
       .updateTask(task)
-      .then(updatedTask => dispatch(actions.updateTask(updatedTask)));
+      .then(tasks => dispatch(actions.updateTask(tasks)));
   };
 };
 
