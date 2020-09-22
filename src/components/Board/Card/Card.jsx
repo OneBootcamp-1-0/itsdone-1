@@ -5,8 +5,7 @@ const Card = props => {
   const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, draggable, status } = props;
 
   const onBtnClick = () => {
-    const isDone = !isDone;
-    onCardEdit(id, {isDone: isDone, status: isDone ? 'done' : status});
+    onCardEdit(id, {isDone: !isDone});
   };
 
   const onCardClick = e => {
