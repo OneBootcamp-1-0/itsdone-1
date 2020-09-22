@@ -18,7 +18,7 @@ const onCardEdit = (cardId, newCardData) => {
     return card.id === cardId;
   });
 
-  let newCard = newCardData;
+  const newCard = newCardData;
 
   if (!newCardData.status) {
     newCard.status = newCard.isDone ? 'done' : 'toDo';
