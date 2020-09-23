@@ -11,21 +11,21 @@ const Header = (props) => {
   const [showCompletedBtn, setShowCompletedBtn] = useState(true);
 
   const onGridLinkClick = () => {
-    if (activeLink === 'canban' || activeLink === 'schedule') {
+    if (activeLink != 'grid') {
       history.push('/grid');
       setActiveLink('grid');
     }
   };
 
   const onCanbanLinkClick = () => {
-    if (activeLink === 'grid' || activeLink === 'schedule') {
+    if (activeLink != 'canban') {
       history.push('/canban');
       setActiveLink('canban');
     }
   };
 
   const onScheduleLinkClick = () => {
-    if (activeLink === 'grid' || activeLink === 'canban') {
+    if (activeLink != 'schedule') {
       history.push('/schedule');
       setActiveLink('schedule');
     }
