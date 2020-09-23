@@ -19,14 +19,12 @@ const tasksReducer = (state = initialState, action) => {
   }
 };
 
-// Action creators
 export const actions = {
   addTask: tasks => ({ type: ADD_TASK, tasks }),
   setTasks: tasks => ({ type: SET_TASKS, tasks }),
   updateTask: tasks => ({ type: UPDATE_TASK, tasks })
 };
 
-// Thunks
 export const requestTasks = () => {
   return dispatch => {
     tasksAPI
