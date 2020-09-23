@@ -21,9 +21,11 @@ const onCardEdit = (cardId, newCardData) => {
 
   const newCard = newCardData;
 
-  if (!newCardData.status) {
+  if (!newCard.status) {
     newCard.status = newCard.isDone ? 'done' : 'toDo';
   }
+
+  newCard.date = newCard.date ? new Date(newCard.date).toISOString() : '';
 
   state.cards = state.cards.map(card => {
     return card.id === foundCard.id ? { ...card, ...newCard } : card;
