@@ -5,6 +5,8 @@ import TagCloud from './TagCloud.jsx';
 const Card = props => {
   const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, tags , draggable} = props;
 
+  const butifiedDate = date ? new Date(date).toDateString() : '';
+
   const onBtnClick = () => {
     onCardEdit(id, {isDone: !isDone});
   };
@@ -24,7 +26,7 @@ const Card = props => {
   };
 
   return <div onDragStart={draggable ? onDragStart : null} draggable={draggable} data-card={true} id={id} onClick={onCardClick} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
-      <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{date}</p>
+      <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{butifiedDate}</p>
       <h2 className={`${css.card__title} ${isDone ? css.card__done : ''}`}>{title}</h2>
       <div className={css.card__note_wrapper}>
         <div className={css.card__note_shadow}></div>
