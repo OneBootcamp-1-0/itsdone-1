@@ -9,17 +9,17 @@ const Schedule = props => {
   const noDateCards = cards.filter(card => card.date === "" );
 
   const todayCards = cards.filter(card => {
-    let now = new Date();
-    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
-    let tomorrow = new Date(today.valueOf() + 86400000);
-    let cardTimestamp = Date.parse(card.date);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+    const tomorrow = new Date(today.valueOf() + 86400000);
+    const cardTimestamp = Date.parse(card.date);
     return cardTimestamp >= today && cardTimestamp < tomorrow;
   });
 
   const outdatedCards = cards.filter(card => {
-    let now = new Date();
-    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
-    let cardTimestamp = Date.parse(card.date);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+    const cardTimestamp = Date.parse(card.date);
     return cardTimestamp < today;
   });
 
