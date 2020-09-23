@@ -10,15 +10,15 @@ const Schedule = props => {
 
   const todayCards = cards.filter(card => {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
-    const tomorrow = new Date(today.valueOf() + 86400000);
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const tomorrow = new Date(today + 86400000);
     const cardTimestamp = Date.parse(card.date);
     return cardTimestamp >= today && cardTimestamp < tomorrow;
   });
 
   const outdatedCards = cards.filter(card => {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).valueOf();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     const cardTimestamp = Date.parse(card.date);
     return cardTimestamp < today;
   });
