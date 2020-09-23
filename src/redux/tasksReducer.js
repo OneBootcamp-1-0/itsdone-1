@@ -25,28 +25,35 @@ export const actions = {
   updateTask: tasks => ({ type: UPDATE_TASK, tasks })
 };
 
-export const requestTasks = () => {
-  return dispatch => {
-    tasksAPI
-      .getTasks()
-      .then(tasks => dispatch(actions.setTasks(tasks)));
-  };
-};
-
-export const addTask = task => {
-  return dispatch => {
-    tasksAPI
-      .addTask(task)
-      .then(tasks => dispatch(actions.addTask(tasks)));
-  };
-};
-
-export const updateTask = task => {
-  return dispatch => {
-    tasksAPI
-      .updateTask(task)
-      .then(tasks => dispatch(actions.updateTask(tasks)));
-  };
+export const operations = {
+  requestTasks = () => {
+    return dispatch => {
+      tasksAPI
+        .getTasks()
+        .then(tasks => dispatch(actions.setTasks(tasks)));
+    };
+  },
+  addTask = task => {
+    return dispatch => {
+      tasksAPI
+        .addTask(task)
+        .then(tasks => dispatch(actions.addTask(tasks)));
+    };
+  },
+  addTask = task => {
+    return dispatch => {
+      tasksAPI
+        .addTask(task)
+        .then(tasks => dispatch(actions.addTask(tasks)));
+    };
+  },
+  updateTask = task => {
+    return dispatch => {
+      tasksAPI
+        .updateTask(task)
+        .then(tasks => dispatch(actions.updateTask(tasks)));
+    };
+  }
 };
 
 export default tasksReducer;
