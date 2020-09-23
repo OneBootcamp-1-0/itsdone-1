@@ -40,13 +40,6 @@ export const operations = {
         .then(tasks => dispatch(actions.addTask(tasks)));
     };
   },
-  addTask = task => {
-    return dispatch => {
-      tasksAPI
-        .addTask(task)
-        .then(tasks => dispatch(actions.addTask(tasks)));
-    };
-  },
   updateTask = task => {
     return dispatch => {
       tasksAPI
