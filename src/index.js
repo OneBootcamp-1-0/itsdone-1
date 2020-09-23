@@ -9,6 +9,7 @@ const history = createBrowserHistory();
 const getJsonData = () => fetch('/src/data.json').then(res => res.json());
 
 let state = {
+  blocks: [],
   columns: [],
   cards: []
 };
@@ -34,7 +35,7 @@ const onCardEdit = (cardId, newCardData) => {
 const renderDOM = (state) => {
   ReactDOM.render(
     <Router history={history}>
-      <App cards={state.cards} columns={state.columns} onCardEdit={onCardEdit} />
+      <App cards={state.cards} columns={state.columns} blocks={state.blocks} onCardEdit={onCardEdit} />
     </Router>
     , document.getElementById('root')
   );
