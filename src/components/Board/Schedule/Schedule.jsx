@@ -22,13 +22,13 @@ const Schedule = props => {
     <div className={css.schedule}>
       {blocks.map((block, i) => {
       if (block.title === "LATER THIS WEEK") {
-        <Block onCardEdit={onCardEdit} cards={filterLaterThisWeek()} key={i} title={block.title} />
+        return <Block onCardEdit={onCardEdit} cards={filterLaterThisWeek()} key={i} title={block.title} />
       }
       if (block.title === "LATER THIS MONTH") {
-        <Block onCardEdit={onCardEdit} cards={filterLaterThisMonth()} key={i} title={block.title} />
+        return <Block onCardEdit={onCardEdit} cards={filterLaterThisMonth()} key={i} title={block.title} />
       }
       if (block.title === "UPCOMING MONTHS") {
-        <Block onCardEdit={onCardEdit} cards={filterUpcomingMonths()} key={i} title={block.title} />
+        return <Block onCardEdit={onCardEdit} cards={filterUpcomingMonths()} key={i} title={block.title} />
       }
       })}
     </div>
