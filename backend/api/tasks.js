@@ -18,6 +18,8 @@ router.post('/', (req, res) => {
     const newTask = req.body;
     const tasks = data.tasks;
 
+    newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
+
     tasks.push({...newTask, id: tasks.length});
 
     res.status(201).json({
@@ -34,6 +36,8 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   try {
     const newTask = req.body;
+
+    newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
 
     data.tasks = data.tasks.map(task => {
       return task.id === Number(req.params.id) ? newTask : task;

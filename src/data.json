@@ -19,7 +19,7 @@
   ],
   "cards": [
     {
-      "date": "Завтра в 14:00",
+      "date": "",
       "id": 0,
       "isDone": false,
       "status": "toDo",
@@ -27,8 +27,8 @@
       "title": "Не забыть выполнить важную задачу",
       "tags": []
     },
-    {
-      "date": "Вчера в 4:00",
+    { 
+      "date": "2020-09-23T11:46:13.791Z",
       "id": 1,
       "isDone": false,
       "status": "toDo",
@@ -37,7 +37,7 @@
       "tags": []
     },
     {
-      "date": "Послезавтра в 1:15",
+      "date": "2020-09-23T11:46:13.791Z",
       "id": 2,
       "isDone": true,
       "status": "done",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "date": "20.05.15 в 3:00",
+      "date": "2020-09-23T11:46:13.791Z",
       "id": 3,
       "isDone": false,
       "status": "inTesting",
@@ -61,7 +61,7 @@
       "tags": []
     },
     {
-      "date": "20.06.11 в 8:42",
+      "date": "2020-09-23T11:46:13.791Z",
       "id": 4,
       "isDone": false,
       "status": "inProgress",
@@ -70,7 +70,7 @@
       "tags": []
     },
     {
-      "date": "Завтра в 4:00",
+      "date": "2021-04-23T17:46:13.791Z",
       "id": 5,
       "isDone": false,
       "status": "inProgress",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "date": "Послезавтра в 1:15",
+      "date": "2020-09-23T11:46:13.791Z",
       "id": 6,
       "isDone": true,
       "status": "done",
@@ -94,7 +94,7 @@
       "tags": []
     },
     {
-      "date": "20.05.15 в 3:00",
+      "date": "2020-04-20T11:46:13.791Z",
       "id": 7,
       "isDone": false,
       "status": "inTesting",
