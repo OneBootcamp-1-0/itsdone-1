@@ -1,4 +1,4 @@
-import tasksAPI from '../api/tasksAPI.js';
+import tasksAPI from '../api/tasks_api.js';
 
 const ADD_TASK = 'ADD_NEW_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
