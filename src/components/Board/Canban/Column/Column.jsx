@@ -3,7 +3,6 @@ import css from './Column.css';
 import CanbanCard from '../../Card/CanbanCard.jsx';
 import EditCard from '../../Card/EditCard.jsx';
 
-
 const Column = props => {
   const { status, title, onCardEdit } = props;
 
@@ -17,7 +16,7 @@ const Column = props => {
     const cardId = e.dataTransfer.getData('card_id');
 
     if (cardId) {
-      onCardEdit(Number(cardId), {status: status});
+      onCardEdit(Number(cardId), {status: status, isDone: status === 'done'});
     }
   }
 
@@ -34,7 +33,7 @@ const Column = props => {
             return <EditCard key={i} setEditCard={setEditCard} id={card.id} onCardEdit={onCardEdit} date={card.date} title={card.title} text={card.text}/>
           }
           if (card.status === status) {
-            return <CanbanCard setEditCard={setEditCard} onCardEdit={onCardEdit} key={i} id={card.id} date={card.date} title={card.title} text={card.text} />
+            return <CanbanCard status={card.status} setEditCard={setEditCard} onCardEdit={onCardEdit} key={i} id={card.id} date={card.date} title={card.title} text={card.text} tags={card.tags} />
           }
         })}
       </div>
