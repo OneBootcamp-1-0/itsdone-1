@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Column from './Column/Column.jsx';
 import css from './Canban.css';
 import NewCard from '../NewCard/NewCard.jsx';

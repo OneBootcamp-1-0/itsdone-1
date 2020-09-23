@@ -1,0 +1,37 @@
+
+.tag_cloud {
+  column-gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1.2;
+  list-style: none;
+  padding: 0;
+  row-gap: 2px;
+  width: 143px;
+}
+
+.tag_cloud__item {
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.tag_cloud__item:nth-of-type(1) {
+  color: #eb5757;
+}
+
+.tag_cloud__item:nth-of-type(2) {
+  color: #f2994a;
+}
+
+.tag_cloud__item:nth-of-type(3) {
+  color: #219653;
+}
+
+.tag_cloud__item:nth-of-type(4) {
+  color: #56ccf2;
+}
+
+.tag_cloud__item:nth-of-type(5) {
+  color: #2f80ed;
+}

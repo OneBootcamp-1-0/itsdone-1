@@ -5,6 +5,18 @@
   padding: 20px 0;
 }
 
+.button_show {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 30px;
+  margin-left: auto;
+  padding: 0;
+  text-decoration: underline;
+}
+
 .nav_link {
   font-size: 18px;
   color: inherit;
@@ -15,7 +27,7 @@
   color: inherit;
 }
 
-.nav_link:first-child::after {
+.nav_link:not(:last-child)::after {
   content: '|';
   margin: 0 5px;
 }
