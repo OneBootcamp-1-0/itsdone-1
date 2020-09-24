@@ -21,7 +21,7 @@ const Block = props => {
         if (card.id === editCard.id && editCard.isEdit) {
           return <EditCard key={i} setEditCard={setEditCard} id={card.id} onCardEdit={onCardEdit} date={card.date} title={card.title} text={card.text} />
         }
-        return <GridCard setEditCard={setEditCard} onCardEdit={onCardEdit} id={card.id} key={i} isDone={card.isDone} date={card.date} title={card.title} text={card.text} tags={card.tags} />
+        return <GridCard setEditCard={setEditCard} onCardEdit={onCardEdit} id={card.id} key={i} isDone={card.isDone} date={card.date} title={card.title} text={card.text} tags={card.tags}/>
       })}
       </div>
     </div>

@@ -6,33 +6,43 @@ const Schedule = props => {
 
   const { cards, blocks, onCardEdit } = props;
 
-  const noDateCards = cards.filter(card => card.date === "" );
+  const filterDateCards = (block) => {
+    return cards.filter((card) => {
 
-  const todayCards = cards.filter(card => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const tomorrow = new Date(today.getTime() + 86400000);
-    const cardTimestamp =  new Date(card.date);
-    return cardTimestamp >= today && cardTimestamp < tomorrow;
-  });
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const tomorrow = new Date(today.getTime() + 86400000);
+      const nextWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (8 - now.getDay()));
+      const nextMonthStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (31 - now.getDate()));
+      const cardTimestamp =  new Date(card.date);
+      console.log(nextMonthStart);
 
-  const outdatedCards = cards.filter(card => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const cardTimestamp = new Date(card.date);
-    return cardTimestamp < today;
-  });
+
+      if (block.title === "NO DATE") {
+        return card.date === "";
+      }
+      if (block.title === "TODAY") {
+        return cardTimestamp >= today && cardTimestamp < tomorrow;
+      }
+      if (block.title === "OUTDATED") {
+        return cardTimestamp < today;
+      }
+      if (block.title === "LATER THIS WEEK") {
+        return cardTimestamp >= tomorrow && cardTimestamp < nextWeekStart;
+      }
+      if (block.title === "LATER THIS MONTH") {
+        return cardTimestamp >= nextWeekStart && cardTimestamp <= nextMonthStart;
+      }
+      if (block.title === "UPCOMING MONTHS") {
+        return cardTimestamp > nextMonthStart;
+      }
+    });
+  }
 
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-        if (block.title === "NO DATE") {
-          return <Block onCardEdit={onCardEdit} cards={noDateCards} key={i} title={block.title} />
-        } if (block.title === "TODAY") {
-          return <Block onCardEdit={onCardEdit} cards={todayCards} key={i} title={block.title} />
-        } if (block.title === "OUTDATED") {
-          return <Block onCardEdit={onCardEdit} cards={outdatedCards} key={i} title={block.title} />
-        }
+        return <Block onCardEdit={onCardEdit} cards={filterDateCards(block)} key={i} title={block.title} />
       })}
     </div>
   );
