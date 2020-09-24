@@ -5,7 +5,7 @@ const TagCloud = props => {
 
   const {tags} = props;
 
-  const tagItems = tags.map(tag => <li className={css.tag_cloud__item}>{tag}</li>)
+  const tagItems = tags.map((tag,i) => <li className={css.tag_cloud__item} key={i}>{tag}</li>)
 
   return (
     <ul className={css.tag_cloud}>
