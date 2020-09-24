@@ -6,30 +6,25 @@ const Schedule = props => {
   const { cards, blocks, onCardEdit } = props;
   let date = new Date();
 
-  const filterLaterThisWeek = () => {
-    return cards.filter(card => Date.parse(card.date) > date && Date.parse(card.date) < date.setDate(date.getDate() + 7));
-  };
-
-  const filterLaterThisMonth = () => {
-    return cards.filter(card => Date.parse(card.date) > date && Date.parse(card.date) < date.setMonth(date.getMonth() + 1));
-  }
-
-  const filterUpcomingMonths = () => {
-    return cards.filter(card => Date.parse(card.date) > date.setMonth(date.getMonth() + 1));
+  const filterDateCards = (block) => {
+    return cards.filter((card) => {
+      if (block.title === "LATER THIS WEEK") {
+        return Date.parse(card.date) > date && Date.parse(card.date) < date.setDate(date.getDate() + 7);
+      }
+      if (block.title === "LATER THIS MONTH") {
+        return Date.parse(card.date) > date && Date.parse(card.date) < date.setDate(date.getMonth(), 31);
+      }
+      if (block.title === "UPCOMING MONTHS") {
+        return  Date.parse(card.date) > date.setDate(date.getMonth(), 31);
+      }
+      console.log()
+    });
   }
 
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-      if (block.title === "LATER THIS WEEK") {
-        return <Block onCardEdit={onCardEdit} cards={filterLaterThisWeek()} key={i} title={block.title} />
-      }
-      if (block.title === "LATER THIS MONTH") {
-        return <Block onCardEdit={onCardEdit} cards={filterLaterThisMonth()} key={i} title={block.title} />
-      }
-      if (block.title === "UPCOMING MONTHS") {
-        return <Block onCardEdit={onCardEdit} cards={filterUpcomingMonths()} key={i} title={block.title} />
-      }
+        return <Block onCardEdit={onCardEdit} cards={filterDateCards(block)} key={i} title={block.title} />
       })}
     </div>
   );
