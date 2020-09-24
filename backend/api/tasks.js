@@ -18,13 +18,13 @@ router.post('/', (req, res) => {
     const newTask = req.body;
     const tasks = data.tasks;
 
-    newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
+    const newModifiedTask = {...newTask, id: tasks.length, date: newTask.date ? new Date(newTask.date).toISOString() : ''};
 
-    tasks.push({...newTask, id: tasks.length});
+    tasks.push(newModifiedTask);
 
     res.status(201).json({
       message: 'New task successfully created',
-      tasks: tasks
+      newTask: newModifiedTask
     });
   } catch (err) {
     res.status(500).json({
@@ -45,7 +45,7 @@ router.patch('/:id', (req, res) => {
 
     res.status(200).json({
       message: 'Task successfully updated',
-      tasks: data.tasks
+      updatedTask: newTask
     });
   } catch (err) {
     res.status(500).json({
