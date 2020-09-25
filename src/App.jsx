@@ -33,9 +33,9 @@ const App = () => {
         ?
         <Board>
           <Switch>
-            <Route exact path="/canban" render={() => <Canban updateTask={operations.updateTask} cards={cards} />} />
-            <Route exact path="/grid" render={() => <Grid updateTask={operations.updateTask} cards={showAll ? cards : filterDoneCards()} />} />
-            <Route exact path="/schedule" render={() => <Schedule updateTask={operations.updateTask} cards={showAll ? cards : filterDoneCards()} />} />
+            <Route exact path="/canban" render={() => <Canban cards={cards} />} />
+            <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
+            <Route exact path="/schedule" render={() => <Schedule cards={showAll ? cards : filterDoneCards()} />} />
             <Route path="/" render={() => <Redirect to="/grid" />} />
           </Switch>
         </Board>
