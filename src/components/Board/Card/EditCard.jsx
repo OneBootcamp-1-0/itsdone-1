@@ -4,7 +4,7 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, id, setEditCard } = props;
+  const { date, title, text, id, setEditCard, isNewCard } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
@@ -15,7 +15,11 @@ const EditCard = props => {
   const onFormSubmit = e => {
     e.preventDefault();
     e.persist();
-    dispatch(operations.updateTask({ id: id, ...formVal }));
+    if (isNewCard) {
+      dispatch(operations.addTask({ ...formVal }));
+    } else {
+      dispatch(operations.updateTask({ id: id, ...formVal }));
+    }
     setEditCard({
       id: id,
       isEdit: false

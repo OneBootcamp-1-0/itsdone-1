@@ -3,7 +3,7 @@ import css from './NewCard.css';
 import EditCard from './../Card/EditCard.jsx'
 
 const NewCard = props => {
-  const {id, onCardEdit } = props;
+  const { id } = props;
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -14,7 +14,7 @@ const NewCard = props => {
   };
 
   return isEdit
-    ? <EditCard setIsEdit={setIsEdit} id={id} onCardEdit={onCardEdit} date='' title='' text=''/>
+    ? <EditCard isNewCard={true} setIsEdit={setIsEdit} id={id} date='' title='' text='' />
     : <button className={css.new_card} onClick={onNewCardClick}>+ ADDNEW</button>
 
 };
