@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     const newTask = req.body;
     const tasks = data.tasks;
 
-    const newModifiedTask = {...newTask, id: tasks.length, date: newTask.date ? new Date(newTask.date).toISOString() : ''};
+    const newModifiedTask = { ...newTask, id: tasks.length, date: newTask.date ? new Date(newTask.date).toISOString() : '' };
 
     tasks.push(newModifiedTask);
 
@@ -35,12 +35,16 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   try {
-    const newTask = req.body;
+    let newTask = req.body;
 
     newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
 
     data.tasks = data.tasks.map(task => {
-      return task.id === Number(req.params.id) ? newTask : task;
+      if (task.id === Number(req.params.id)) {
+        newTask = { ...task, ...newTask };
+        return newTask;
+      }
+      return task;
     });
 
     res.status(200).json({
