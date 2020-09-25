@@ -2,9 +2,12 @@ import React from 'react';
 import Column from './Column/Column.jsx';
 import css from './Canban.css';
 import NewCard from '../NewCard/NewCard.jsx';
+import { useDispatch } from 'react-redux';
+import { operations } from '../../../redux/tasksReducer.js';
 
 const Canban = props => {
-  const { cards, updateTask } = props;
+  const { cards } = props;
+  const dispatch = useDispatch();
   const columns = [
     {
       status: "toDo",
@@ -26,7 +29,7 @@ const Canban = props => {
 
   return (
     <div className={css.canban}>
-      {columns.map((column, i) => <Column updateTask={updateTask} cards={cards} key={i} status={column.status} title={column.title} />)}
+      {columns.map((column, i) => <Column dispatch={dispatch} updateTask={operations.updateTask} cards={cards} key={i} status={column.status} title={column.title} />)}
       <div className={css.canban__addNewCard}>
         <NewCard />
       </div>
