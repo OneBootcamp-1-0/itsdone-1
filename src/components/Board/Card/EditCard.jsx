@@ -7,13 +7,14 @@ const EditCard = props => {
     date: date,
     title: title,
     text: text,
-    tags: tags
+    tags: tags.join(' ')
   });
 
   const onFormSubmit = e => {
     e.preventDefault();
     e.persist();
-    onCardEdit(id, formVal);
+    console.log(formVal.tags)
+    onCardEdit(id, {...formVal, tags: formVal.tags.split(' ')});
     setEditCard({
       id: id,
       isEdit: false
@@ -22,11 +23,22 @@ const EditCard = props => {
 
   const onInputChange = (value, type) => {
     if (type === 'tags') {
-      setFormVal({ ...formVal, [type]: value.split(/[\s|,]/g, 5) });
+      if (value.split(' ').length <= 5) {
+        const validArr = [];
+        value.split(' ').forEach((item) => {
+          if (item.length <= 9) {
+            validArr.push(true);
+          } else {
+            validArr.push(false);
+          }
+        });
+        if (validArr.indexOf(false) === -1) {
+          setFormVal({ ...formVal, [type]: value});
+        }
+      }
     } else {
       setFormVal({ ...formVal, [type]: value });
     }
-
   }
 
   const closeEditCard = e => {
