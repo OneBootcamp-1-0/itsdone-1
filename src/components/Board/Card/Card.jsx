@@ -3,7 +3,7 @@ import css from './Card.css';
 import TagCloud from './TagCloud.jsx';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, tags , draggable} = props;
+  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, tags , draggable, allTags} = props;
 
   const butifiedDate = date ? new Date(date).toDateString() : '';
 
@@ -32,7 +32,7 @@ const Card = props => {
         <div className={css.card__note_shadow}></div>
         <p className={`${css.card__note} ${isDone ? css.card__done : ''}`}>{text}</p>
       </div>
-      <TagCloud tags={tags}/>
+      <TagCloud allTags={allTags} onCardEdit={onCardEdit} id={id} tags={tags}/>
       {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
     </div>
 };
