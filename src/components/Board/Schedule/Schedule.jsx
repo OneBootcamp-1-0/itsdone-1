@@ -5,20 +5,36 @@ import css from './Schedule.css';
 const Schedule = props => {
   const { cards } = props;
 
-  const noDateCards = cards.filter(card => card.date === "");
-  const todayCards = cards.filter(card => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const tomorrow = new Date(today.getTime() + 86400000);
-    const cardTimestamp = new Date(card.date);
-    return cardTimestamp >= today && cardTimestamp < tomorrow;
-  });
-  const outdatedCards = cards.filter(card => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const cardTimestamp = new Date(card.date);
-    return cardTimestamp < today;
-  });
+  const filterDateCards = (block) => {
+    return cards.filter((card) => {
+
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const tomorrow = new Date(today.getTime() + 86400000);
+      const nextWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (8 - now.getDay()));
+      const nextMonthStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (31 - now.getDate()));
+      const cardTimestamp =  new Date(card.date);
+
+      if (block.title === "NO DATE") {
+        return card.date === "";
+      }
+      if (block.title === "TODAY") {
+        return cardTimestamp >= today && cardTimestamp < tomorrow;
+      }
+      if (block.title === "OUTDATED") {
+        return cardTimestamp < today;
+      }
+      if (block.title === "LATER THIS WEEK") {
+        return cardTimestamp >= tomorrow && cardTimestamp < nextWeekStart;
+      }
+      if (block.title === "LATER THIS MONTH") {
+        return cardTimestamp >= nextWeekStart && cardTimestamp <= nextMonthStart;
+      }
+      if (block.title === "UPCOMING MONTHS") {
+        return cardTimestamp > nextMonthStart;
+      }
+    });
+  }
 
   const blocks = [
     {
@@ -44,13 +60,7 @@ const Schedule = props => {
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-        if (block.title === "NO DATE") {
-          return <Block cards={noDateCards} key={i} title={block.title} />
-        } if (block.title === "TODAY") {
-          return <Block cards={todayCards} key={i} title={block.title} />
-        } if (block.title === "OUTDATED") {
-          return <Block cards={outdatedCards} key={i} title={block.title} />
-        }
+        return <Block cards={filterDateCards(block)} key={i} title={block.title} />
       })}
     </div>
   );
