@@ -30,7 +30,7 @@ const Column = props => {
       <div className={css.column__cards} droppable="true" onDragOver={onDragOver} onDrop={onDrop}>
         {props.cards.map((card, i) => {
           if (card.id === editCard.id && editCard.isEdit) {
-            return <EditCard key={i} setEditCard={setEditCard} id={card.id} onCardEdit={onCardEdit} date={card.date} title={card.title} text={card.text}/>
+            return <EditCard key={i} setEditCard={setEditCard} id={card.id} onCardEdit={onCardEdit} date={card.date} title={card.title} text={card.text} tags={card.tags} />
           }
           if (card.status === status) {
             return <CanbanCard status={card.status} setEditCard={setEditCard} onCardEdit={onCardEdit} key={i} id={card.id} date={card.date} title={card.title} text={card.text} tags={card.tags} />
