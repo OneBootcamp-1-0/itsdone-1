@@ -1,42 +1,4 @@
 {
-  "blocks": [
-    {
-      "title": "NO DATE"
-    },
-    {
-      "title": "TODAY"
-    },
-    {
-      "title": "OUTDATED"
-    },
-    {
-      "title": "LATER THIS WEEK"
-    },
-    {
-      "title": "LATER THIS MONTH"
-    },
-    {
-      "title": "UPCOMING MONTHS"
-    }
-  ],
-  "columns": [
-    {
-      "status": "toDo",
-      "title": "TODO"
-    },
-    {
-      "status": "inProgress",
-      "title": "IN PROGRESS"
-    },
-    {
-      "status": "inTesting",
-      "title": "IN TESTING"
-    },
-    {
-      "status": "done",
-      "title": "DONE"
-    }
-  ],
   "cards": [
     {
       "date": "",
