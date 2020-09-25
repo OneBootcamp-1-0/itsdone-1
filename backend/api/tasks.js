@@ -39,8 +39,12 @@ router.patch('/:id', (req, res) => {
 
     data.tasks = data.tasks.map(task => {
       if (task.id === Number(req.params.id)) {
+        if (!newTask.status && newTask.isDone !== task.isDone) {
+          newTask.status = newTask.isDone ? 'done' : 'toDo';
+        }
         newTask = { ...task, ...newTask };
         newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
+
         return newTask;
       }
       return task;
