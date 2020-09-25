@@ -21,7 +21,6 @@ const App = () => {
     dispatch(operations.requestTasks());
   }, []);
 
-
   const filterDoneCards = () => {
     return cards.filter(card => !card.isDone);
   };
@@ -29,9 +28,8 @@ const App = () => {
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
-      {cards.length > 0
-        ?
-        <Board>
+      {cards.length
+        ? <Board>
           <Switch>
             <Route exact path="/canban" render={() => <Canban cards={cards} />} />
             <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
@@ -39,8 +37,7 @@ const App = () => {
             <Route path="/" render={() => <Redirect to="/grid" />} />
           </Switch>
         </Board>
-        :
-        <div>Loading</div>
+        : <div>Loading</div>
       }
       <Footer />
     </div>
