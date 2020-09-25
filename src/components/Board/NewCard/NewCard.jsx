@@ -14,7 +14,7 @@ const NewCard = props => {
   };
 
   return isEdit
-    ? <EditCard isNewCard={true} setIsEdit={setIsEdit} id={id} date='' title='' text='' />
+    ? <EditCard isNewCard={true} setIsEdit={setIsEdit} id={id} date='' title='' text='' tags={[]} />
     : <button className={css.new_card} onClick={onNewCardClick}>+ ADDNEW</button>
 
 };
