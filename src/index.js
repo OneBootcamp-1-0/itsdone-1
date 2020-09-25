@@ -24,11 +24,15 @@ const onCardEdit = (cardId, newCardData) => {
   if (!newCard.status) {
     newCard.status = newCard.isDone ? 'done' : 'toDo';
   }
-
+console.log(newCardData)
   newCard.date = newCard.date ? new Date(newCard.date).toISOString() : '';
 
   state.cards = state.cards.map(card => {
-    return card.id === foundCard.id ? { ...card, ...newCard } : card;
+    if (card.id === foundCard.id) {
+      console.log({ ...card, ...newCard })
+      return { ...card, ...newCard }
+    }
+    return card
   });
 
   renderDOM(state);
