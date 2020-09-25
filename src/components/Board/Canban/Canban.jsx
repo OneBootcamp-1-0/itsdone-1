@@ -4,11 +4,29 @@ import css from './Canban.css';
 import NewCard from '../NewCard/NewCard.jsx';
 
 const Canban = props => {
-  const { cards, columns, onCardEdit } = props;
+  const { cards, updateTask } = props;
+  const columns = [
+    {
+      status: "toDo",
+      title: "TODO"
+    },
+    {
+      status: "inProgress",
+      title: "IN PROGRESS"
+    },
+    {
+      status: "inTesting",
+      title: "IN TESTING"
+    },
+    {
+      status: "done",
+      title: "DONE"
+    }
+  ];
 
   return (
     <div className={css.canban}>
-      {columns.map((column, i) => <Column onCardEdit={onCardEdit} cards={cards} key={i} status={column.status} title={column.title} />)}
+      {columns.map((column, i) => <Column updateTask={updateTask} cards={cards} key={i} status={column.status} title={column.title} />)}
       <div className={css.canban__addNewCard}>
         <NewCard />
       </div>
