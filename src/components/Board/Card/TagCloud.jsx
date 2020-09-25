@@ -13,7 +13,7 @@ const TagCloud = props => {
     return color;
   };
 
-  const tagItems = tags.map((tag,i) => <li className={css.tag_cloud__item} style={{color : getColor()}} key={i}>{tag}</li>)
+  const tagItems = tags.map((tag,i) => <li className={css.tag_cloud__item} style={{color : getColor()}} key={i}>{tag[0] === '#' ? tag : `#${tag}` }</li>)
 
   return (
     <ul className={css.tag_cloud}>
