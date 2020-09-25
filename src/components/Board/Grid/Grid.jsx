@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import css from './Grid.css';
 import GridCard from '../Card/GridCard.jsx';
 import NewCard from '../NewCard/NewCard.jsx';
@@ -14,7 +14,7 @@ const Grid = props => {
 
   return (
     <div className={css.grid}>
-      <NewCard id={cards.length-1} onCardEdit={onCardEdit}/>
+      <NewCard id={cards.length - 1} onCardEdit={onCardEdit} />
       {cards.map((card, i) => {
         if (card.id === editCard.id && editCard.isEdit) {
           return <EditCard key={i} setEditCard={setEditCard} id={card.id} onCardEdit={onCardEdit} date={card.date} title={card.title} text={card.text} />
