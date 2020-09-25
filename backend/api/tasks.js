@@ -37,11 +37,10 @@ router.patch('/:id', (req, res) => {
   try {
     let newTask = req.body;
 
-    newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
-
     data.tasks = data.tasks.map(task => {
       if (task.id === Number(req.params.id)) {
         newTask = { ...task, ...newTask };
+        newTask.date = newTask.date ? new Date(newTask.date).toISOString() : '';
         return newTask;
       }
       return task;
