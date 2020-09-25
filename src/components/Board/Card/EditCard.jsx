@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, onCardEdit, id, setEditCard } = props;
+  const { date, title, text, tags, onCardEdit, id, setEditCard, isNewCard } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
     text: text,
     tags: tags.join(' ')
   });
+  const dispatch = useDispatch();
 
   const onFormSubmit = e => {
     e.preventDefault();
     e.persist();
-    console.log(formVal.tags)
-    onCardEdit(id, {...formVal, tags: formVal.tags.split(' ')});
+    if (isNewCard) {
+      dispatch(operations.addTask({ ...formVal, tags: formVal.tags.split(' ') }));
+    } else {
+      dispatch(operations.updateTask({ id: id, ...formVal, tags: formVal.tags.split(' ') }));
+    }
     setEditCard({
       id: id,
       isEdit: false
@@ -33,7 +39,7 @@ const EditCard = props => {
           }
         });
         if (validArr.indexOf(false) === -1) {
-          setFormVal({ ...formVal, [type]: value});
+          setFormVal({ ...formVal, [type]: value });
         }
       }
     } else {

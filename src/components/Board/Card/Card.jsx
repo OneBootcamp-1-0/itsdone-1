@@ -1,14 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import css from './Card.css';
-import TagCloud from './TagCloud.jsx';
+import TagCloud from './TagCloud.jsx'
+import { operations } from '../../../redux/tasksReducer.js';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, onCardEdit, setEditCard, tags , draggable} = props;
+  const { isButton, date, title, text, isDone, id, setEditCard, tags , draggable} = props;
+
+  const dispatch = useDispatch();
 
   const butifiedDate = date ? new Date(date).toDateString() : '';
 
   const onBtnClick = () => {
-    onCardEdit(id, {isDone: !isDone});
+    dispatch(operations.updateTask({isDone: !isDone, id: id}))
   };
 
   const onCardClick = e => {

@@ -31,21 +31,21 @@ export const actions = {
 };
 
 export const operations = {
-  requestTasks = () => {
+  requestTasks: () => {
     return dispatch => {
       tasksAPI
         .getTasks()
         .then(tasks => dispatch(actions.setTasks(tasks)));
     };
   },
-  addTask = task => {
+  addTask: task => {
     return dispatch => {
       tasksAPI
         .addTask(task)
         .then(newTask => dispatch(actions.addTask(newTask)));
     };
   },
-  updateTask = task => {
+  updateTask: task => {
     return dispatch => {
       tasksAPI
         .updateTask(task)

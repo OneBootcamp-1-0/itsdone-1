@@ -3,8 +3,7 @@ import Block from './Block/Block.jsx';
 import css from './Schedule.css';
 
 const Schedule = props => {
-
-  const { cards, blocks, onCardEdit } = props;
+  const { cards } = props;
 
   const filterDateCards = (block) => {
     return cards.filter((card) => {
@@ -15,8 +14,6 @@ const Schedule = props => {
       const nextWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (8 - now.getDay()));
       const nextMonthStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (31 - now.getDate()));
       const cardTimestamp =  new Date(card.date);
-      console.log(nextMonthStart);
-
 
       if (block.title === "NO DATE") {
         return card.date === "";
@@ -39,10 +36,31 @@ const Schedule = props => {
     });
   }
 
+  const blocks = [
+    {
+      "title": "NO DATE"
+    },
+    {
+      "title": "TODAY"
+    },
+    {
+      "title": "OUTDATED"
+    },
+    {
+      "title": "LATER THIS WEEK"
+    },
+    {
+      "title": "LATER THIS MONTH"
+    },
+    {
+      "title": "UPCOMING MONTHS"
+    }
+  ];
+
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-        return <Block onCardEdit={onCardEdit} cards={filterDateCards(block)} key={i} title={block.title} />
+        return <Block cards={filterDateCards(block)} key={i} title={block.title} />
       })}
     </div>
   );
