@@ -69,7 +69,7 @@ const EditCard = props => {
 
   return (
     <div className={css.card}>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} className={css.card__form}>
         <input type='date' className={css.card__date} onChange={e => onInputChange(e.target.value, 'date')} value={formVal.date} />
         <input type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} />
         <textarea cols='20' rows='4' className={css.card__edit_note} onChange={e => onInputChange(e.target.value, 'text')} value={formVal.text} />
