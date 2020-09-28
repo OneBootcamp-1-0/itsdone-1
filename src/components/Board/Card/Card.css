@@ -12,6 +12,12 @@
   width: 200px;
 }
 
+.card__form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .card__done {
   color: #bdbdbd;
   text-decoration: line-through;
@@ -35,7 +41,8 @@
 }
 
 .card__note_wrapper {
-  height: 75px;
+  display: flex;
+  flex-direction: column;
   overflow-y: hidden;
   position: relative;
 }
@@ -49,7 +56,7 @@
 
 .card__note {
   margin: 0;
-  margin-bottom: auto;
+  margin-bottom: 10px;
 }
 
 .card__edit_note {
