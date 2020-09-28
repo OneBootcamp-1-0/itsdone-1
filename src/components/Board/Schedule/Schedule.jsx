@@ -60,7 +60,8 @@ const Schedule = props => {
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-        return <Block cards={filterDateCards(block)} key={i} title={block.title} />
+        if ((filterDateCards(block).length >= 1) || (block.title === "NO DATE"))
+          return <Block cards={filterDateCards(block)} key={i} title={block.title} />
       })}
     </div>
   );
