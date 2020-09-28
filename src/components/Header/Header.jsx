@@ -7,27 +7,17 @@ const Header = (props) => {
   const { setShowAll } = props;
 
   const history = useHistory();
-  const [ activeLink, setActiveLink ] = useState(history.location.pathname.slice(1) || 'grid');
+  const [ activeLink, setActiveLink ] = useState(history.location.pathname.slice(1));
   const [showCompletedBtn, setShowCompletedBtn] = useState(true);
 
-  const onGridLinkClick = () => {
-    if (activeLink != 'grid') {
-      history.push('/grid');
-      setActiveLink('grid');
-    }
-  };
+  if (activeLink !== 'grid' && activeLink !== 'canban' && activeLink !== 'schedule') {
+    setActiveLink('grid');
+  }
 
-  const onCanbanLinkClick = () => {
-    if (activeLink != 'canban') {
-      history.push('/canban');
-      setActiveLink('canban');
-    }
-  };
-
-  const onScheduleLinkClick = () => {
-    if (activeLink != 'schedule') {
-      history.push('/schedule');
-      setActiveLink('schedule');
+  const onNavLinkClick = clickedLink => {
+    if (activeLink !== clickedLink) {
+      history.push(clickedLink);
+      setActiveLink(clickedLink);
     }
   };
 
@@ -43,9 +33,9 @@ const Header = (props) => {
       </div>
       <button onClick={onButtonShowClick} type='button' className={css.button_show}>{showCompletedBtn ? 'Hide completed' : 'Show completed'}</button>
       <div>
-        <NavLink data-active-link={activeLink === 'grid' ? true : false} onClick={onGridLinkClick} className={`${css.nav_link} ${css.nav_link_active}`} to='/grid'>Grid</NavLink>
-        <NavLink data-active-link={activeLink === 'canban' ? true : false} onClick={onCanbanLinkClick} className={css.nav_link} to='/canban'>Canban</NavLink>
-        <NavLink data-active-link={activeLink === 'schedule' ? true : false} onClick={onScheduleLinkClick} className={css.nav_link} to='/schedule'>Schedule</NavLink>
+        <NavLink data-active-link={activeLink === 'grid' ? true : false} onClick={() => onNavLinkClick('grid')} className={`${css.nav_link} ${css.nav_link_active}`} to='/grid'>Grid</NavLink>
+        <NavLink data-active-link={activeLink === 'canban' ? true : false} onClick={() => onNavLinkClick('canban')} className={css.nav_link} to='/canban'>Canban</NavLink>
+        <NavLink data-active-link={activeLink === 'schedule' ? true : false} onClick={() => onNavLinkClick('schedule')} className={css.nav_link} to='/schedule'>Schedule</NavLink>
       </div>
     </header>
   );
