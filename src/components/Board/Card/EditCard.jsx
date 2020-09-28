@@ -63,8 +63,8 @@ const EditCard = props => {
         <input type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} />
         <textarea cols='20' rows='4' className={css.card__edit_note} onChange={e => onInputChange(e.target.value, 'text')} value={formVal.text} />
         <input type="text" onChange={e => onInputChange(e.target.value, 'tags')} value={formVal.tags} />
-        <button type='submit' className={css.card__btn}>Сохранить</button>
-        <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={css.card__btn}>Отменить</button>
+        <button type='submit' className={css.card__btn}>Save</button>
+        <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={`${css.card__btn} ${css.card__btn_cancel}`}>Cancel</button>
       </form>
     </div>
   )
