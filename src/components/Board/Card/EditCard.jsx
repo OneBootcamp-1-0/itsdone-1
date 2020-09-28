@@ -4,7 +4,7 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, onCardEdit, id, setEditCard, isNewCard } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
