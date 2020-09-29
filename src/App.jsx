@@ -33,30 +33,43 @@ const App = () => {
     return color;
   };
 
-  const allTags = {};
+  const addColorsToTags = () => {
+    const allTags = {};
 
-  cards.forEach(card => {
-    Object.keys(card.tags).forEach(tagName => {
-      if (!Object.keys(allTags).includes(tagName)) {
-        allTags[tagName] = card.tags[tagName];
-        if (!allTags[tagName]) {
-          allTags[tagName] = getColor();
+    cards.forEach(card => {
+      Object.keys(card.tags).forEach(tagName => {
+        if (card.tags[tagName]) {
+          allTags[tagName] = card.tags[tagName];
         }
+        else if (!allTags[tagName]) {
+          allTags[tagName] = "";
+        }
+      });
+    });
+
+    Object.keys(allTags).forEach(tagName => {
+      if (!allTags[tagName]) {
+        allTags[tagName] = getColor();
       }
     });
 
-    const newTags = {};
+    cards.forEach(card => {
+      const newTags = {};
 
-    Object.keys(card.tags).forEach(tagName => {
-      if (!card.tags[tagName]) {
-        newTags[tagName] = allTags[tagName];
+      Object.keys(card.tags).forEach(tagName => {
+        if (!card.tags[tagName]) {
+          newTags[tagName] = allTags[tagName];
+        }
+      });
+
+      if (Object.keys(newTags).length) {
+        dispatch(operations.updateTask({ id: card.id, tags: { ...card.tags, ...newTags } }));
       }
     });
+  }
 
-    if (Object.keys(newTags).length) {
-      dispatch(operations.updateTask({ id: card.id, tags: newTags }));
-    }
-  });
+  addColorsToTags();
+
 
   return (
     <div className={css.page}>
