@@ -64,6 +64,12 @@
   margin-bottom: 10px;
 }
 
+.card__btn_group {
+  display: grid;
+  grid-auto-flow: column;
+  margin-top: 20px;
+}
+
 .card__btn {
   font-family: "Roboto";
   background-color: transparent;
@@ -77,10 +83,6 @@
   padding: 0;
   padding-top: 10px;
   text-transform: uppercase;
-}
-
-.card__btn_cancel {
-  margin-left: 10px;
 }
 
 input,
