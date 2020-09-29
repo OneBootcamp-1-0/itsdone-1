@@ -9,6 +9,7 @@
   height: 300px;
   margin: 0 40px 30px 0;
   padding: 15px;
+  position: relative;
   width: 200px;
 }
 
@@ -95,4 +96,10 @@ textarea {
 input:hover,
 input:focus {
   box-shadow: 0px 0px 10px rgba(39, 174, 96, 0.2);
+}
+
+.card__delete {
+  position: absolute;
+  right: 10px;
+  top: 15px;
 }
