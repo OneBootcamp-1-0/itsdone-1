@@ -47,12 +47,6 @@ const EditCard = props => {
     }
   }
 
-  // const onTitleInputChange = e => {
-  //   if (e.target.value.trim().length !== 0) {
-  //     onInputChange(e.target.value, 'title')
-  //   }
-  // }
-
   const closeEditCard = e => {
     if (e.target.closest('button[data-cancelbtn=true]')) {
       setEditCard({
