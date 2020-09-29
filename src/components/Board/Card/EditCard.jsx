@@ -4,23 +4,34 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, onCardEdit, id, setEditCard, isNewCard } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
     text: text,
-    tags: tags.join(' ')
+    tags: Object.keys(tags).join(' ')
   });
+
   const dispatch = useDispatch();
 
   const onFormSubmit = e => {
     e.preventDefault();
     e.persist();
+
+    const newTags = {};
+
+    formVal.tags
+      .split(' ')
+      .forEach(tagName => {
+        newTags[tagName] = tags[tagName] ? tags[tagName] : "";
+      });
+
     if (isNewCard) {
-      dispatch(operations.addTask({ ...formVal, tags: formVal.tags.split(' ') }));
+      dispatch(operations.addTask({ ...formVal, tags: newTags }));
     } else {
-      dispatch(operations.updateTask({ id: id, ...formVal, tags: formVal.tags.split(' ') }));
+      dispatch(operations.updateTask({ id: id, ...formVal, tags: newTags }));
     }
+
     setEditCard({
       id: id,
       isEdit: false
