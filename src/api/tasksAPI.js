@@ -17,6 +17,11 @@ const tasksAPI = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task)
     }).then(res => res.json()).then(data => data.updatedTask);
+  },
+  deleteTask: taskId => {
+    return fetch(`${baseURL}${taskId}`, {
+      method: 'DELETE'
+    }).then(res => res.json()).then(data => data.deletedTaskId)
   }
 };
 

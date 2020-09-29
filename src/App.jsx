@@ -28,17 +28,14 @@ const App = () => {
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
-      {cards.length
-        ? <Board>
-          <Switch>
-            <Route exact path="/canban" render={() => <Canban cards={cards} />} />
-            <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
-            <Route exact path="/schedule" render={() => <Schedule cards={showAll ? cards : filterDoneCards()} />} />
-            <Route path="/" render={() => <Redirect to="/grid" />} />
-          </Switch>
-        </Board>
-        : <div>Loading</div>
-      }
+      <Board>
+        <Switch>
+          <Route exact path="/canban" render={() => <Canban cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule cards={showAll ? cards : filterDoneCards()} />} />
+          <Route path="/" render={() => <Redirect to="/grid" />} />
+        </Switch>
+      </Board>
       <Footer />
     </div>
   );
