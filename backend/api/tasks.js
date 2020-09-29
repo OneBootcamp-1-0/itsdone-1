@@ -61,4 +61,20 @@ router.patch('/:id', (req, res) => {
   }
 });
 
+router.delete('/:id', (req, res) => {
+  try {
+    data.splice(req.params.id);
+
+    res.status(200).json({
+      message: 'Task successfully deleted',
+      tasks: data 
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error'
+    });
+  }
+});
+
+
 module.exports = router;
