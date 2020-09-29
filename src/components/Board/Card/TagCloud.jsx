@@ -9,11 +9,11 @@ const TagCloud = props => {
     return <li className={css.tag_cloud__item} style={{ color: tags[tagName] }} key={i}>{tagName}</li>
   });
 
-  return (
-    <ul className={css.tag_cloud}>
-      {tagItems.length ? tagItems : null}
+  return tagItems.length
+    ? <ul className={css.tag_cloud}>
+      {tagItems}
     </ul>
-  )
+    : null
 };
 
 export default TagCloud;
