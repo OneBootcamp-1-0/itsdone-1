@@ -21,9 +21,12 @@ const tasksReducer = (state = initialState, action) => {
     case ADD_TASK:
       return { ...state, tasks: [...state.tasks, action.newTask] }
     case DELETE_TASK:
-      let newTasks = [...state.tasks];
-      newTasks.splice(action.deletedTaskId, 1);
-      newTasks = newTasks.map((task, i) => ({...task, id: i}));
+      const newTasks = state.tasks.filter(task => {
+        if (task.id !== action.deletedTaskId) {
+          return task
+        }
+      });
+
       return { ...state, tasks: newTasks }
     default:
       return state;
