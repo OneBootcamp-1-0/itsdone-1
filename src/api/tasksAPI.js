@@ -21,7 +21,7 @@ const tasksAPI = {
   deleteTask: taskId => {
     return fetch(`${baseURL}${taskId}`, {
       method: 'DELETE'
-    });
+    }).then(res => res.json()).then(data => data.deletedTaskId)
   }
 };
 
