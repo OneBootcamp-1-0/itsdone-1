@@ -63,11 +63,13 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   try {
-    data.splice(req.params.id);
+    const taskId = req.params.id;
+
+    data.tasks.splice(taskId);
 
     res.status(200).json({
       message: 'Task successfully deleted',
-      tasks: data 
+      deletedTaskId: taskId
     });
   } catch (err) {
     res.status(500).json({
