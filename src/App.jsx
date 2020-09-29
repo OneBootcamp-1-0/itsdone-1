@@ -25,6 +25,39 @@ const App = () => {
     return cards.filter(card => !card.isDone);
   };
 
+  const getColor = () => {
+    const r = Math.floor(Math.random() * (256));
+    const g = Math.floor(Math.random() * (256));
+    const b = Math.floor(Math.random() * (256));
+    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return color;
+  };
+
+  const allTags = {};
+
+  cards.forEach(card => {
+    Object.keys(card.tags).forEach(tagName => {
+      if (!Object.keys(allTags).includes(tagName)) {
+        allTags[tagName] = card.tags[tagName];
+        if (!allTags[tagName]) {
+          allTags[tagName] = getColor();
+        }
+      }
+    });
+
+    const newTags = {};
+
+    Object.keys(card.tags).forEach(tagName => {
+      if (!card.tags[tagName]) {
+        newTags[tagName] = allTags[tagName];
+      }
+    });
+
+    if (Object.keys(newTags).length) {
+      dispatch(operations.updateTask({ id: card.id, tags: newTags }));
+    }
+  });
+
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
