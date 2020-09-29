@@ -4,7 +4,7 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, onCardEdit, id, setEditCard, isNewCard } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
@@ -60,11 +60,11 @@ const EditCard = props => {
     <div className={css.card}>
       <form onSubmit={onFormSubmit} className={css.card__form}>
         <input type='date' className={css.card__date} onChange={e => onInputChange(e.target.value, 'date')} value={formVal.date} />
-        <input type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} />
+        <input type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} required />
         <textarea cols='20' rows='4' className={css.card__edit_note} onChange={e => onInputChange(e.target.value, 'text')} value={formVal.text} />
         <input type="text" onChange={e => onInputChange(e.target.value, 'tags')} value={formVal.tags} />
-        <button type='submit' className={css.card__btn}>Сохранить</button>
-        <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={css.card__btn}>Отменить</button>
+        <button type='submit' className={css.card__btn}>Save</button>
+        <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={`${css.card__btn} ${css.card__btn_cancel}`}>Cancel</button>
       </form>
     </div>
   )
