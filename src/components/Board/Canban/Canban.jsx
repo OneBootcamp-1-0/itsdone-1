@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { operations } from '../../../redux/tasksReducer.js';
 
 const Canban = props => {
-  const { cards } = props;
+  const { cards, allTags } = props;
   const dispatch = useDispatch();
   const columns = [
     {
@@ -29,9 +29,9 @@ const Canban = props => {
 
   return (
     <div className={css.canban}>
-      {columns.map((column, i) => <Column dispatch={dispatch} updateTask={operations.updateTask} cards={cards} key={i} status={column.status} title={column.title} />)}
+      {columns.map((column, i) => <Column allTags={allTags} dispatch={dispatch} updateTask={operations.updateTask} cards={cards} key={i} status={column.status} title={column.title} />)}
       <div className={css.canban__addNewCard}>
-        <NewCard />
+        <NewCard allTags={allTags} />
       </div>
     </div>
   );
