@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer.jsx';
 import Canban from './components/Board/Canban/Canban.jsx';
 import Schedule from './components/Board/Schedule/Schedule.jsx';
 import Grid from './components/Board/Grid/Grid.jsx';
+import Statistics from './components/Statistics/Statistics.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
+      <Statistics />
       <Footer />
     </div>
   );
