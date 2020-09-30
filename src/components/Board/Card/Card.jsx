@@ -39,11 +39,13 @@ const Card = props => {
     <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{butifiedDate}</p>
     <h2 className={`${css.card__title} ${isDone ? css.card__done : ''}`}>{title}</h2>
     <div className={css.card__note_wrapper}>
-      <div className={css.card__note_shadow}></div>
       <p className={`${css.card__note} ${isDone ? css.card__done : ''}`}>{text}</p>
-      <TagCloud tags={tags} />
     </div>
-    {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
+    <div className={css.btn__wrapper}>
+      <div className={css.card__note_shadow}></div>
+      <TagCloud tags={tags} />
+      {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
+    </div>
   </div>
 };
 
