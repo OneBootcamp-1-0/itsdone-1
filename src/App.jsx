@@ -25,15 +25,7 @@ const App = () => {
     return cards.filter(card => !card.isDone);
   };
 
-  const getColor = () => {
-    const r = Math.floor(Math.random() * (256));
-    const g = Math.floor(Math.random() * (256));
-    const b = Math.floor(Math.random() * (256));
-    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-    return color;
-  };
-
-  const addColorsToTags = () => {
+  const getAllTags = () => {
     const allTags = {};
 
     cards.forEach(card => {
@@ -45,39 +37,17 @@ const App = () => {
         }
       });
     });
-
-    Object.keys(allTags).forEach(tagName => {
-      if (!allTags[tagName]) {
-        allTags[tagName] = getColor();
-      }
-    });
-
-    cards.forEach(card => {
-      const newTags = {};
-
-      Object.keys(card.tags).forEach(tagName => {
-        if (!card.tags[tagName]) {
-          newTags[tagName] = allTags[tagName];
-        }
-      });
-
-      if (Object.keys(newTags).length) {
-        dispatch(operations.updateTask({ id: card.id, tags: { ...card.tags, ...newTags } }));
-      }
-    });
-  }
-
-  addColorsToTags();
-
+    return allTags;
+  };
 
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
       <Board>
         <Switch>
-          <Route exact path="/canban" render={() => <Canban cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
-          <Route exact path="/schedule" render={() => <Schedule cards={showAll ? cards : filterDoneCards()} />} />
+          <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
