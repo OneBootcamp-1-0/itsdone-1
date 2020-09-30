@@ -4,7 +4,7 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, id, setEditCard, isNewCard } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard, allTags } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
@@ -13,6 +13,14 @@ const EditCard = props => {
   });
 
   const dispatch = useDispatch();
+
+  const getRandomColor = () => {
+    const r = Math.floor(Math.random() * (256));
+    const g = Math.floor(Math.random() * (256));
+    const b = Math.floor(Math.random() * (256));
+    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return color;
+  };
 
   const onFormSubmit = e => {
     e.preventDefault();
@@ -23,11 +31,11 @@ const EditCard = props => {
     formVal.tags
       .split(' ')
       .forEach(tagName => {
-        newTags[tagName] = tags[tagName] ? tags[tagName] : "";
+        newTags[tagName] = allTags[tagName] ? allTags[tagName] : getRandomColor();
       });
 
     if (isNewCard) {
-      dispatch(operations.addTask({ ...formVal, tags: newTags }));
+      dispatch(operations.addTask({ ...formVal, tags: newTags, status: 'toDo' }));
     } else {
       dispatch(operations.updateTask({ id: id, ...formVal, tags: newTags }));
     }
