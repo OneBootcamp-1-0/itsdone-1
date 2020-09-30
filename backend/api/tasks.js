@@ -61,4 +61,25 @@ router.patch('/:id', (req, res) => {
   }
 });
 
+router.delete('/:id', (req, res) => {
+  try {
+    const taskId = Number(req.params.id);
+    data.tasks = data.tasks.filter((task) => {
+      if (task.id !== taskId) {
+        return task
+      }
+    });
+
+    res.status(200).json({
+      message: 'Task successfully deleted',
+      deletedTaskId: taskId
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error'
+    });
+  }
+});
+
+
 module.exports = router;
