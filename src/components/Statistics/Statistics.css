@@ -1,0 +1,26 @@
+.statistics__inner {
+  display: block;
+  background-color: #333333;
+  color: #f2f2f2;
+  min-height: 270px;
+  padding: 20px 40px 30px;
+}
+
+.statistics__btn {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.statistics__btn__show {
+  display: none;
+  color: #333333;
+  margin-top: 20px;
+  margin-left: 40px;
+}
