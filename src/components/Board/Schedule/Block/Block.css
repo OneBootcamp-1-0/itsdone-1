@@ -9,3 +9,7 @@
   line-height: 1.2;
   padding-left: 10px;
 }
+
+.block__date {
+  font-weight: 700;
+}

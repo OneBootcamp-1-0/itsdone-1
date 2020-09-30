@@ -36,6 +36,15 @@ const Schedule = props => {
     });
   }
 
+  const getToday = () => {
+    const month = new Date().getMonth();
+    const day = new Date().getDate();
+    const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+    const textMonth = months[month];
+    return textMonth + ' ' + day;
+  };
+
+
   const blocks = [
     {
       "title": "NO DATE"
@@ -61,7 +70,7 @@ const Schedule = props => {
     <div className={css.schedule}>
       {blocks.map((block, i) => {
         if ((filterDateCards(block).length >= 1) || (block.title === "NO DATE"))
-          return <Block allTags={allTags} cards={filterDateCards(block)} key={i} title={block.title} />
+          return <Block allTags={allTags} cards={filterDateCards(block)} key={i} title={block.title} date={block.title === "TODAY" ? getToday() : null } />
       })}
     </div>
   );
