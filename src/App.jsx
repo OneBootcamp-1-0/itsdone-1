@@ -40,8 +40,7 @@ const App = () => {
       Object.keys(card.tags).forEach(tagName => {
         if (card.tags[tagName]) {
           allTags[tagName] = card.tags[tagName];
-        }
-        else if (!allTags[tagName]) {
+        } else if (!allTags[tagName]) {
           allTags[tagName] = "";
         }
       });
