@@ -28,10 +28,21 @@ const EditCard = props => {
 
     const newTags = {};
 
+    const addHashtag = string => {
+      let splitedString = string.split('');
+
+      if (splitedString[0] !== '#') {
+        splitedString.unshift('#');
+        splitedString = splitedString.join('');
+        return splitedString;
+      }
+      return string;
+    }
+
     formVal.tags
       .split(' ')
       .forEach(tagName => {
-        newTags[tagName] = allTags[tagName] ? allTags[tagName] : getRandomColor();
+        newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
       });
 
     if (isNewCard) {
