@@ -3,18 +3,24 @@ import css from './Statistics.css';
 
 const Statistics = () => {
 
+  const [activeButton, setActiveButton] = useState('total');
+
   const statBlock = React.createRef();
   const showStatBtn = React.createRef();
 
   const hideStat = () => {
     statBlock.current.style.display = 'none'
     showStatBtn.current.style.display = 'block';
-  }
+  };
 
   const showStat = () => {
     statBlock.current.style.display = 'block';
     showStatBtn.current.style.display = 'none';
-  }
+  };
+
+  const toggleRadioButtons = id => {
+    setActiveButton(id)
+  };
 
   return (
     <div className={css.statistics}>
@@ -36,20 +42,20 @@ const Statistics = () => {
           <div>
             <ul className={css.sorting__list}>
               <li>
-                <input className={css.sorting__input} id="lastweek" name="period" type="radio"/>
+                <input className={css.sorting__input} onChange={e => toggleRadioButtons(e.target.id)} id="lastweek" name="period" type="radio" checked={activeButton === 'lastweek'}/>
                 <label htmlFor="lastweek">Last week</label>
                 </li>
               <li>
-                <input className={css.sorting__input} id="lastmonth" name="period" type="radio"/>
-                <label htmlFor="lastweek">Last month</label>
+                <input className={css.sorting__input} onChange={e => toggleRadioButtons(e.target.id)} id="lastmonth" name="period" type="radio" checked={activeButton === 'lastmonth'}/>
+                <label htmlFor="lastmonth">Last month</label>
                 </li>
               <li>
-                <input className={css.sorting__input} id="lastyear" name="period" type="radio"/>
-                <label htmlFor="lastweek">Last year</label>
+                <input className={css.sorting__input} onChange={e => toggleRadioButtons(e.target.id)} id="lastyear" name="period" type="radio" checked={activeButton === 'lastyear'}/>
+                <label htmlFor="lastyear">Last year</label>
                 </li>
               <li>
-                <input className={css.sorting__input} id="total" name="period" type="radio"/>
-                <label htmlFor="lastweek">Total</label>
+                <input className={css.sorting__input} onChange={e => toggleRadioButtons(e.target.id)} id="total" name="period" type="radio"checked={activeButton === 'total'}/>
+                <label htmlFor="total">Total</label>
               </li>
             </ul>
             <ul className={css.indicators}>

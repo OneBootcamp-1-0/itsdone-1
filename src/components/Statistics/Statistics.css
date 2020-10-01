@@ -60,7 +60,7 @@
   padding: 0;
 }
 
-.sorting__list li {
+.sorting__list label {
   text-decoration: underline;
 }
 
@@ -71,6 +71,10 @@
 
 .sorting__input {
   display: none;
+}
+
+.sorting__input:checked + label{
+  text-decoration: none;
 }
 
 .indicators {
