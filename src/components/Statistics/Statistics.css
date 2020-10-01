@@ -99,4 +99,6 @@
 
 .indicators p {
   text-align: center;
+  max-width: 120px;
+  font-size: 12px;
 }
