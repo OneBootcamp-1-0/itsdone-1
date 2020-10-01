@@ -13,6 +13,7 @@ const EditCard = props => {
   });
 
   const dispatch = useDispatch();
+  const titleRef = React.createRef();
 
   const getRandomColor = () => {
     const r = Math.floor(Math.random() * (256));
@@ -73,8 +74,16 @@ const EditCard = props => {
       } else {
         tagsInputRef.current.setCustomValidity('');
       }
-
       setFormVal({ ...formVal, [type]: value });
+
+    } else if (type === 'title') {
+      if (value.trim().length < 1) {
+        titleRef.current.setCustomValidity('Must be filled')
+        setFormVal({ ...formVal, [type]: value });
+      } else {
+        titleRef.current.setCustomValidity('');
+        setFormVal({ ...formVal, [type]: value });
+      }
     } else {
       setFormVal({ ...formVal, [type]: value });
     }
@@ -93,11 +102,13 @@ const EditCard = props => {
     <div className={css.card}>
       <form onSubmit={onFormSubmit} className={css.card__form}>
         <input type='date' className={css.card__date} onChange={e => onInputChange(e.target.value, 'date')} value={formVal.date} />
-        <input type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} required />
+        <input ref={titleRef} type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} required />
         <textarea cols='20' rows='4' className={css.card__edit_note} onChange={e => onInputChange(e.target.value, 'text')} value={formVal.text} />
         <input ref={tagsInputRef} type="text" onChange={e => onInputChange(e.target.value, 'tags')} value={formVal.tags} />
-        <button type='submit' className={css.card__btn}>Save</button>
-        <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={`${css.card__btn} ${css.card__btn_cancel}`}>Cancel</button>
+        <div className={css.card__btn_group}>
+          <button type='submit' className={css.card__btn}>Save</button>
+          <button data-cancelbtn={true} onClick={closeEditCard} type='submit' className={css.card__btn}>Cancel</button>
+        </div>
       </form>
     </div>
   )
