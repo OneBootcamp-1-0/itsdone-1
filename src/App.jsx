@@ -41,6 +41,16 @@ const App = () => {
     return allTags;
   };
 
+  const getValueFromObject = (value, values) => {
+    const res = Object.keys(values).find(item => {
+      if (value <= item) {
+        return item
+      }
+    });
+
+    return values[res];
+  };
+
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
