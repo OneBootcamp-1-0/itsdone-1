@@ -6,6 +6,11 @@
   padding: 20px 40px 30px;
 }
 
+.statistics__wrapper {
+  display: flex;
+  column-gap: 100px;
+}
+
 .statistics__btn {
   background-color: transparent;
   border: 0;
@@ -13,6 +18,7 @@
   cursor: pointer;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 30px;
   padding: 0;
   text-transform: uppercase;
   text-decoration: underline;
@@ -21,6 +27,78 @@
 .statistics__btn__show {
   display: none;
   color: #333333;
+  margin: 0;
   margin-top: 20px;
   margin-left: 40px;
+}
+
+.statistics__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.statistics__list li:not(:last-child){
+  margin-bottom: 10px;
+}
+
+.statistics__list span {
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.completed__list {
+  list-style-type: none;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.sorting__list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sorting__list label {
+  text-decoration: underline;
+}
+
+.sorting__list li:not(:last-child)::after {
+  content: "|";
+  margin: 0 5px;
+}
+
+.sorting__input {
+  display: none;
+}
+
+.sorting__input:checked + label{
+  text-decoration: none;
+}
+
+.indicators {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+}
+
+.indicators li {
+  margin-right: 30px;
+}
+
+.indicators span {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.indicators p {
+  text-align: center;
+  max-width: 120px;
+  font-size: 12px;
 }
