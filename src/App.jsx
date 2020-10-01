@@ -25,20 +25,32 @@ const App = () => {
     return cards.filter(card => !card.isDone);
   };
 
+  const getAllTags = () => {
+    const allTags = {};
+
+    cards.forEach(card => {
+      Object.keys(card.tags).forEach(tagName => {
+        if (card.tags[tagName]) {
+          allTags[tagName] = card.tags[tagName];
+        } else if (!allTags[tagName]) {
+          allTags[tagName] = "";
+        }
+      });
+    });
+    return allTags;
+  };
+
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
-      {cards.length
-        ? <Board>
-          <Switch>
-            <Route exact path="/canban" render={() => <Canban cards={cards} />} />
-            <Route exact path="/grid" render={() => <Grid cards={showAll ? cards : filterDoneCards()} />} />
-            <Route exact path="/schedule" render={() => <Schedule cards={showAll ? cards : filterDoneCards()} />} />
-            <Route path="/" render={() => <Redirect to="/grid" />} />
-          </Switch>
-        </Board>
-        : <div>Loading</div>
-      }
+      <Board>
+        <Switch>
+          <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
+          <Route path="/" render={() => <Redirect to="/grid" />} />
+        </Switch>
+      </Board>
       <Footer />
     </div>
   );

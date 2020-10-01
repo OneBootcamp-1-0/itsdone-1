@@ -4,32 +4,59 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, id, setEditCard, isNewCard } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard, allTags } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
     text: text,
-    tags: tags.join(' ')
+    tags: Object.keys(tags).join(' ')
   });
+
   const dispatch = useDispatch();
   const titleRef = React.createRef();
+
+  const getRandomColor = () => {
+    const r = Math.floor(Math.random() * (256));
+    const g = Math.floor(Math.random() * (256));
+    const b = Math.floor(Math.random() * (256));
+    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return color;
+  };
 
   const onFormSubmit = e => {
     e.preventDefault();
     e.persist();
-    if (formVal.title.trim().length > 0) {
-      if (isNewCard) {
-        dispatch(operations.addTask({ ...formVal, tags: formVal.tags.split(' ') }));
-      } else {
-        dispatch(operations.updateTask({ id: id, ...formVal, tags: formVal.tags.split(' ') }));
-      }
-      setEditCard({
-        id: id,
-        isEdit: false
-      });
-    }
-  }
 
+    const newTags = {};
+
+    const addHashtag = string => {
+      let splitedString = string.split('');
+
+      if (splitedString[0] !== '#') {
+        splitedString.unshift('#');
+        splitedString = splitedString.join('');
+        return splitedString;
+      }
+      return string;
+    }
+
+    formVal.tags
+      .split(' ')
+      .forEach(tagName => {
+        newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
+      });
+
+    if (isNewCard) {
+      dispatch(operations.addTask({ ...formVal, tags: newTags, status: 'toDo' }));
+    } else {
+      dispatch(operations.updateTask({ id: id, ...formVal, tags: newTags }));
+    }
+
+    setEditCard({
+      id: id,
+      isEdit: false
+    });
+  }
 
   const onInputChange = (value, type) => {
     if (type === 'tags') {
