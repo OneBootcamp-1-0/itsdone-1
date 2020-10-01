@@ -44,13 +44,15 @@ const EditCard = props => {
     formVal.tags
       .split(' ')
       .forEach(tagName => {
-        newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
+        if (tagName !== '#') {
+          newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
+        }  
       });
 
     if (isNewCard) {
-      dispatch(operations.addTask({ ...formVal, tags: newTags, status: 'toDo' }));
+      dispatch(operations.addTask({ ...formVal, tags: formVal.tags.length ? newTags : {}, status: 'toDo' }));
     } else {
-      dispatch(operations.updateTask({ id: id, ...formVal, tags: newTags }));
+      dispatch(operations.updateTask({ id: id, ...formVal, tags: formVal.tags.length ? newTags : {} }));
     }
 
     setEditCard({
