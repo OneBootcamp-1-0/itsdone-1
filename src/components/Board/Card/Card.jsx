@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import css from './Card.css';
 import TagCloud from './TagCloud.jsx'
@@ -7,7 +7,7 @@ import deleteSVG from '../../../assets/delete.svg';
 
 const Card = props => {
   const { isButton, date, title, text, isDone, id, setEditCard, tags, draggable } = props;
-  const [isHovered, setIsHovered] = useState(false);
+  const deleteImgRef = React.createRef();
   const dispatch = useDispatch();
 
   const butifiedDate = date ? new Date(date).toDateString() : '';
@@ -34,8 +34,8 @@ const Card = props => {
     e.dataTransfer.setData('card_id', e.target.id);
   };
 
-  return <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onDragStart={draggable ? onDragStart : null} draggable={draggable} data-card={true} id={id} onClick={onCardClick} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
-    {isHovered ? <img onClick={onDeleteCardClick} className={css.card__delete} width="15px" src={deleteSVG} alt={`delete task: ${title}`} /> : null}
+  return <div onMouseEnter={() => deleteImgRef.current.style.display = 'block'} onMouseLeave={() => deleteImgRef.current.style.display = 'none'} onDragStart={draggable ? onDragStart : null} draggable={draggable} data-card={true} id={id} onClick={onCardClick} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
+    <img style={{display: 'none'}} ref={deleteImgRef} onClick={onDeleteCardClick} className={css.card__delete} width="15px" src={deleteSVG} alt={`delete task: ${title}`} />
     <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{butifiedDate}</p>
     <h2 className={`${css.card__title} ${isDone ? css.card__done : ''}`}>{title}</h2>
     <div className={css.card__note_wrapper}>
