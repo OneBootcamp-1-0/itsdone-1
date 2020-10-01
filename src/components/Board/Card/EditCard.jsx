@@ -12,6 +12,7 @@ const EditCard = props => {
     tags: tags.join(' ')
   });
   const dispatch = useDispatch();
+  const titleRef = React.createRef();
 
   const onFormSubmit = e => {
     e.preventDefault();
@@ -47,10 +48,10 @@ const EditCard = props => {
       }
     } else if (type === 'title') {
       if (value.trim().length < 1) {
-        document.querySelector('input[data-title=true]').setCustomValidity('must be filled')
+        titleRef.current.setCustomValidity('Must be filled')
         setFormVal({ ...formVal, [type]: value });
       } else {
-        document.querySelector('input[data-title=true]').setCustomValidity('');
+        titleRef.current.setCustomValidity('');
         setFormVal({ ...formVal, [type]: value });
       }
     } else {
@@ -71,7 +72,7 @@ const EditCard = props => {
     <div className={css.card}>
       <form onSubmit={onFormSubmit} className={css.card__form}>
         <input type='date' className={css.card__date} onChange={e => onInputChange(e.target.value, 'date')} value={formVal.date} />
-        <input data-title={true} type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} required />
+        <input ref={titleRef} type='text' className={css.card__title} onChange={e => onInputChange(e.target.value, 'title')} value={formVal.title} required />
         <textarea cols='20' rows='4' className={css.card__edit_note} onChange={e => onInputChange(e.target.value, 'text')} value={formVal.text} />
         <input type="text" onChange={e => onInputChange(e.target.value, 'tags')} value={formVal.tags} />
         <div className={css.card__btn_group}>
