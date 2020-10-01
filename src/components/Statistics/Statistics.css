@@ -13,6 +13,7 @@
   cursor: pointer;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 30px;
   padding: 0;
   text-transform: uppercase;
   text-decoration: underline;
@@ -21,6 +22,28 @@
 .statistics__btn__show {
   display: none;
   color: #333333;
+  margin: 0;
   margin-top: 20px;
   margin-left: 40px;
+}
+
+.statistics__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.statistics__list li:not(:last-child){
+  margin-bottom: 10px;
+}
+
+.statistics__list span {
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.completed__list {
+  list-style-type: none;
+  margin-top: 10px;
+  padding-left: 20px;
 }
