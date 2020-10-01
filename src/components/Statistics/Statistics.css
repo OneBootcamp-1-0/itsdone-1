@@ -6,6 +6,11 @@
   padding: 20px 40px 30px;
 }
 
+.statistics__wrapper {
+  display: flex;
+  column-gap: 100px;
+}
+
 .statistics__btn {
   background-color: transparent;
   border: 0;
@@ -46,4 +51,48 @@
   list-style-type: none;
   margin-top: 10px;
   padding-left: 20px;
+}
+
+.sorting__list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sorting__list li {
+  text-decoration: underline;
+}
+
+.sorting__list li:not(:last-child)::after {
+  content: "|";
+  margin: 0 5px;
+}
+
+.sorting__input {
+  display: none;
+}
+
+.indicators {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+}
+
+.indicators li {
+  margin-right: 30px;
+}
+
+.indicators span {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.indicators p {
+  text-align: center;
 }
