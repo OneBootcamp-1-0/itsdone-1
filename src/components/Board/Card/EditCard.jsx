@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
@@ -22,7 +22,7 @@ const EditCard = props => {
     return color;
   };
 
-  const tagsInputRef = useRef();
+  const tagsInputRef = React.createRef();
 
   const onFormSubmit = e => {
     e.preventDefault();
