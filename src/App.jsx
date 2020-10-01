@@ -62,7 +62,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics />
+      <Statistics cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );

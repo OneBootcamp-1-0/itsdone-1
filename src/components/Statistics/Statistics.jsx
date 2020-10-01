@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
 import css from './Statistics.css';
 
-const Statistics = () => {
+const Statistics = props => {
+  const { getValueFromObject, cards } = props;
 
   const [activeButton, setActiveButton] = useState('total');
 
   const statBlock = React.createRef();
   const showStatBtn = React.createRef();
+  const ratio = React.createRef();
 
   const hideStat = () => {
     statBlock.current.style.display = 'none'
     showStatBtn.current.style.display = 'block';
   };
 
+
   const showStat = () => {
     statBlock.current.style.display = 'block';
     showStatBtn.current.style.display = 'none';
+    ratio.current.style.color = getColor();
   };
 
   const toggleRadioButtons = id => {
     setActiveButton(id)
   };
+
+  const filterCompleted = () => {
+    return cards.filter(card => card.isDone).length;
+  };
+
+  const completedNumber = filterCompleted();
+  const ratioCompleted = Math.round((completedNumber / cards.length) * 100);
+
+  const getColor = () => {
+    return getValueFromObject(ratioCompleted, {
+      50: "#EB5757",
+      75: "#F2C94C",
+      100: "#27AE60"
+    });
+  }
 
   return (
     <div className={css.statistics}>
@@ -37,7 +56,7 @@ const Statistics = () => {
                 <li>Total <span>310</span></li>
               </ul>
             </li>
-            <li>Completed tasks ratio <span>77%</span></li>
+            <li>Completed tasks ratio<span ref={ratio}>{ratioCompleted}%</span></li>
           </ul>
           <div>
             <ul className={css.sorting__list}>
@@ -67,7 +86,7 @@ const Statistics = () => {
               </li>
               <li>Tasks being tested
                 <span>0</span>
-                <p>You should💔</p>
+                <p>You should probably go on and test something 💔</p>
               </li>
               <li>Tasks completed
                 <span>12</span>
