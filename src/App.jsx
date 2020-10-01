@@ -51,6 +51,42 @@ const App = () => {
     return values[res];
   };
 
+  const filterDateСompletedCards = blocks => {
+    return cards.filter((card) => {
+
+      const now = new Date();
+      const cardTimestamp =  new Date(card.date);
+
+      const currentWeekMondayIndex = now.getDate() - now.getDay() + 1;
+      const prevWeekStartIndex = new Date().setDate(currentWeekMondayIndex - 7);
+      const prevWeekEndIndex = new Date().setDate(currentWeekMondayIndex);
+      const prevWeekStartDate = new Date(prevWeekStartIndex);
+      const prevWeekEndDate = new Date(prevWeekEndIndex);
+      const prevWeekStart = new Date(prevWeekStartDate.getFullYear(), prevWeekStartDate.getMonth(), prevWeekStartDate.getDate());
+      const prevWeekEnd = new Date(prevWeekStart.getTime() + 86400000 * 7);
+
+      const prevMonthStart = new Date(now.getFullYear(), now.getMonth()-1, 1);
+      const prevMonthEnd = new Date(now.getFullYear(), now.getMonth()-1, 31);
+      const prevYearStart = new Date(now.getFullYear()-1, 0, 1);;
+      const prevYearEnd = new Date(now.getFullYear(), 0, 1);
+
+      if (block.title === "Last week") {
+        return cardTimestamp >= prevWeekStart && cardTimestamp < prevWeekEnd;
+      }
+      if (block.title === "Last month") {
+        return cardTimestamp >= prevMonthStart && cardTimestamp < prevMonthEnd;
+      }
+      if (block.title === "Last year") {
+        return cardTimestamp >= prevYearStart && cardTimestamp < prevYearEnd;
+      }
+      if (block.title === "Total") {
+        return cards;
+      }
+    });
+  };
+
+  //[filterDateCompletedCards(block).length]
+  
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
