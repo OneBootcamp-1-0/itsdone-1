@@ -39,7 +39,8 @@ router.patch('/:id', (req, res) => {
 
     data.tasks = data.tasks.map(task => {
       if (task.id === Number(req.params.id)) {
-        if (!newTask.status && (newTask.isDone === true || newTask.isDone === false) && newTask.isDone !== task.isDone) {
+        const isDonePropEmpty = newTask.isDone === undefined;
+        if (!newTask.status && !isDonePropEmpty && newTask.isDone !== task.isDone) {
           newTask.status = newTask.isDone ? 'done' : 'toDo';
         }
         newTask = { ...task, ...newTask };
