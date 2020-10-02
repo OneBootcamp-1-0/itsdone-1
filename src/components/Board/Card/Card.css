@@ -44,7 +44,7 @@
 .card__note_wrapper {
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .card__note_shadow {
@@ -58,6 +58,25 @@
 .card__note {
   margin: 0;
   margin-bottom: 10px;
+}
+
+.card__note_wrapper::-webkit-scrollbar,
+.card__edit_note::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.card__note_wrapper::-webkit-scrollbar-track,
+.card__edit_note::-webkit-scrollbar-track {
+  background: #62696e;
+  border-radius: 46px;
+  width: 4px;
+}
+
+.card__note_wrapper::-webkit-scrollbar-thumb,
+.card__edit_note::-webkit-scrollbar-thumb {
+  background: #869199;
+  border-radius: 46px;
 }
 
 .card__edit_note {
