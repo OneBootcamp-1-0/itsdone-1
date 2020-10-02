@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import css from './Statistics.css';
 
 const Statistics = props => {
-  const { statusesToQuantity } = props;
+  const { statusesToQuantity, getValueFromObject, cards } = props;
 
   const [activeButton, setActiveButton] = useState('total');
 
   const statBlock = React.createRef();
   const showStatBtn = React.createRef();
+  const ratio = React.createRef();
 
   const hideStat = () => {
     statBlock.current.style.display = 'none'
     showStatBtn.current.style.display = 'block';
   };
+
 
   const showStat = () => {
     statBlock.current.style.display = 'block';
@@ -22,6 +24,42 @@ const Statistics = props => {
   const toggleRadioButtons = id => {
     setActiveButton(id)
   };
+
+  const filterCompleted = () => {
+    return cards.filter(card => card.isDone).length;
+  };
+  
+  const filterTesting = () => {
+    return cards.filter(card => card.status === "inTesting").length;
+  };
+
+  const completedNumber = filterCompleted();
+  const testingNumber = filterTesting();
+
+  const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
+  const ratioInTesting = cards.length ? Math.round((testingNumber / cards.length) * 100) : 0;
+
+  const getCompletedTaskPhrase = () => {
+    return getValueFromObject(ratioCompleted, {
+      75: "",
+      100: "Nice job! Keep it up!"
+    });
+  };
+
+  const getBeingTestedTaskPhrase = () => {
+    return getValueFromObject(ratioInTesting, {
+      25: "You should probably go on and test something 💔",
+      100: ""
+    });
+  };
+  
+  const getColor = () => {
+    return getValueFromObject(ratioCompleted, {
+      50: "#EB5757",
+      75: "#F2C94C",
+      100: "#27AE60"
+    });
+  }
 
   return (
     <div className={css.statistics}>
@@ -38,7 +76,7 @@ const Statistics = props => {
                 <li>Total <span>310</span></li>
               </ul>
             </li>
-            <li>Completed tasks ratio <span>77%</span></li>
+            <li>Completed tasks ratio<span style={{color: getColor()}} ref={ratio}>{ratioCompleted}%</span></li>
           </ul>
           <div>
             <ul className={css.sorting__list}>
@@ -68,11 +106,12 @@ const Statistics = props => {
               </li>
               <li>Tasks being tested
                 <span>{statusesToQuantity['inTesting']}</span>
-                <p>You should💔</p>
+                 <p>{getBeingTestedTaskPhrase()}</p>
               </li>
               <li>Tasks completed
                 <span>{statusesToQuantity['done']}</span>
-                <p>Nice job! Keep it up!</p>
+                <span>0</span>
+                <p>{getCompletedTaskPhrase()}</p>
               </li>
             </ul>
           </div>

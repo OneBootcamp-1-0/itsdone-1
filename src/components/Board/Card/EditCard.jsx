@@ -15,13 +15,20 @@ const EditCard = props => {
   const dispatch = useDispatch();
   const titleRef = React.createRef();
 
-  const getRandomColor = () => {
-    const r = Math.floor(Math.random() * (256));
-    const g = Math.floor(Math.random() * (256));
-    const b = Math.floor(Math.random() * (256));
-    const color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-    return color;
-  };
+  const getRandomColor = ranges => {
+    if (!ranges) {
+      ranges = [
+          [50,256],
+          [30, 150],
+          [180, 240]
+      ];
+    }
+    const g = () => {
+        const range = ranges.splice(Math.floor(Math.random()*ranges.length), 1)[0];
+        return Math.floor(Math.random() * (range[1] - range[0])) + range[0];
+    };
+    return '#' + g().toString(16) + g().toString(16) + g().toString(16);
+};
 
   const tagsInputRef = React.createRef();
 
@@ -47,7 +54,7 @@ const EditCard = props => {
       .forEach(tagName => {
         if (tagName !== '#') {
           newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
-        }  
+        }
       });
 
     if (isNewCard) {
