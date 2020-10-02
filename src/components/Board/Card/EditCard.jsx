@@ -50,9 +50,10 @@ const EditCard = props => {
     }
 
     formVal.tags
+      .trim()
       .split(' ')
       .forEach(tagName => {
-        if (tagName !== '#') {
+        if (tagName !== '#' && tagName !== "") {
           newTags[addHashtag(tagName)] = allTags[addHashtag(tagName)] ? allTags[addHashtag(tagName)] : getRandomColor();
         }
       });
