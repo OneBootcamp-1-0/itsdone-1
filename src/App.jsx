@@ -14,6 +14,8 @@ import { operations } from './redux/tasksReducer.js';
 
 const App = () => {
   const [showAll, setShowAll] = useState(true);
+  const [activeButton, setActiveButton] = useState('total');
+
   const cards = useSelector(state => state.tasks.tasks);
 
   const dispatch = useDispatch();
@@ -51,7 +53,7 @@ const App = () => {
     return values[res];
   };
 
-  const filterDateСompletedCards = blocks => {
+  const filterDateTasks = blocks => {
     return cards.filter((card) => {
 
       const now = new Date();
@@ -85,7 +87,7 @@ const App = () => {
     });
   };
 
-  //[filterDateCompletedCards(block).length]
+  //[filterDateTaskss(block).length]
   
   return (
     <div className={css.page}>
@@ -98,7 +100,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics />
+      <Statistics setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks()}/>
       <Footer />
     </div>
   );
