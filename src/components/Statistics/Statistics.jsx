@@ -2,7 +2,7 @@ import React from 'react';
 import css from './Statistics.css';
 
 const Statistics = props => {
-  const { activeButton, setActiveButton, statusesToQuantity, getValueFromObject, cards } = props
+  const { activeButton, setActiveButton, statusesToQuantity, getValueFromObject, cards, filterDateTasks, doneCards } = props
 
   const statBlock = React.createRef();
   const showStatBtn = React.createRef();
@@ -20,7 +20,7 @@ const Statistics = props => {
   };
 
   const toggleRadioButtons = id => {
-    setActiveButton(id)
+    setActiveButton(id);
   };
 
   const filterCompleted = () => {
@@ -65,13 +65,13 @@ const Statistics = props => {
         <button className={css.statistics__btn} onClick={hideStat}>HIDE STATISTICS</button>
         <div className={css.statistics__wrapper}>
           <ul className={css.statistics__list}>
-            <li>Tasks created <span>400</span></li>
+            <li>Tasks created <span>{filterDateTasks(cards, 'total').length}</span></li>
             <li>Tasks completed
               <ul className={css.completed__list}>
-                <li>Last week <span>20</span></li>
-                <li>Last month <span>68</span></li>
-                <li>Last year <span>310</span></li>
-                <li>Total <span>310</span></li>
+                <li>Last week <span>{filterDateTasks(doneCards, 'lastweek').length}</span></li>
+                <li>Last month <span>{filterDateTasks(doneCards, 'lastmonth').length}</span></li>
+                <li>Last year <span>{filterDateTasks(doneCards, 'lastyear').length}</span></li>
+                <li>Total <span>{filterDateTasks(doneCards, 'total').length}</span></li>
               </ul>
             </li>
             <li>Completed tasks ratio<span style={{color: getColor()}} ref={ratio}>{ratioCompleted}%</span></li>
