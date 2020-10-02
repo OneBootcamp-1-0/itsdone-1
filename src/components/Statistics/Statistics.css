@@ -62,6 +62,7 @@
 
 .sorting__list label {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .sorting__list li:not(:last-child)::after {
