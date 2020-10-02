@@ -53,7 +53,7 @@ const App = () => {
     return values[res];
   };
 
-  const filterDateTasks = blocks => {
+  const filterDateTasks = blockTitle => {
     return cards.filter((card) => {
 
       const now = new Date();
@@ -72,16 +72,16 @@ const App = () => {
       const prevYearStart = new Date(now.getFullYear()-1, 0, 1);;
       const prevYearEnd = new Date(now.getFullYear(), 0, 1);
 
-      if (block.title === "Last week") {
+      if (blockTitle === "lastweek") {
         return cardTimestamp >= prevWeekStart && cardTimestamp < prevWeekEnd;
       }
-      if (block.title === "Last month") {
+      if (blockTitle === "lastmonth") {
         return cardTimestamp >= prevMonthStart && cardTimestamp < prevMonthEnd;
       }
-      if (block.title === "Last year") {
+      if (blockTitle === "lastyear") {
         return cardTimestamp >= prevYearStart && cardTimestamp < prevYearEnd;
       }
-      if (block.title === "Total") {
+      if (blockTitle === "total") {
         return cards;
       }
     });
@@ -113,7 +113,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks()} statusesToQuantity={getCardsQuantityByStatuses(cards)} cards={cards} getValueFromObject={getValueFromObject}/>
+      <Statistics setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks()} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(activeButton))} cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );
