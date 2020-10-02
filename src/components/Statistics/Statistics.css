@@ -7,8 +7,10 @@
 }
 
 .statistics__wrapper {
-  display: flex;
-  column-gap: 100px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: max-content 1fr;
+  grid-column-gap: 100px;
 }
 
 .statistics__btn {

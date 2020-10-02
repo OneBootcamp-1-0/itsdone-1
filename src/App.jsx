@@ -51,6 +51,21 @@ const App = () => {
     return values[res];
   };
 
+  const getCardsQuantityByStatuses = (cards) => {
+    const result = {
+      'toDo': 0,
+      'inProgress': 0,
+      'inTesting': 0,
+      'done': 0
+    };
+
+    cards.forEach(card => {
+      result[card.status] += 1;
+    })
+
+    return result;
+  }
+
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
@@ -62,7 +77,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics cards={cards} getValueFromObject={getValueFromObject}/>
+      <Statistics statusesToQuantity={getCardsQuantityByStatuses(cards)} cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );
