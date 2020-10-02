@@ -86,8 +86,6 @@ const App = () => {
       }
     });
   };
-
-  //[filterDateTaskss(block).length]
   
   return (
     <div className={css.page}>
