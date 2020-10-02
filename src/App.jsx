@@ -77,7 +77,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics statusesToQuantity={getCardsQuantityByStatuses(cards)}/>
+      <Statistics statusesToQuantity={getCardsQuantityByStatuses(cards)} cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );
