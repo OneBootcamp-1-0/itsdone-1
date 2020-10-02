@@ -2,6 +2,6 @@
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   height: 100vh;
-  padding: 0 30px;
+  padding: 0;
   row-gap: 40px;
 }
