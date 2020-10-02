@@ -24,8 +24,8 @@ const App = () => {
     dispatch(operations.requestTasks());
   }, []);
 
-  const filterDoneCards = () => {
-    return cards.filter(card => !card.isDone);
+  const filterDoneCards = (isDone) => {
+    return cards.filter(card => card.isDone === isDone);
   };
 
   const getAllTags = () => {
@@ -53,17 +53,15 @@ const App = () => {
     return values[res];
   };
 
-  const filterDateTasks = blockTitle => {
-    return cards.filter((card) => {
+  const filterDateTasks = (cards, blockTitle) => {
+    return cards.filter(card => {
 
       const now = new Date();
       const cardTimestamp =  new Date(card.date);
 
       const currentWeekMondayIndex = now.getDate() - now.getDay() + 1;
       const prevWeekStartIndex = new Date().setDate(currentWeekMondayIndex - 7);
-      const prevWeekEndIndex = new Date().setDate(currentWeekMondayIndex);
       const prevWeekStartDate = new Date(prevWeekStartIndex);
-      const prevWeekEndDate = new Date(prevWeekEndIndex);
       const prevWeekStart = new Date(prevWeekStartDate.getFullYear(), prevWeekStartDate.getMonth(), prevWeekStartDate.getDate());
       const prevWeekEnd = new Date(prevWeekStart.getTime() + 86400000 * 7);
 
@@ -87,7 +85,7 @@ const App = () => {
     });
   };
 
-  const getCardsQuantityByStatuses = (cards) => {
+  const getCardsQuantityByStatuses = cards => {
     const result = {
       'toDo': 0,
       'inProgress': 0,
@@ -108,12 +106,12 @@ const App = () => {
       <Board>
         <Switch>
           <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
-          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterDoneCards()} />} />
+          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
+          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks()} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(activeButton))} cards={cards} getValueFromObject={getValueFromObject}/>
+      <Statistics doneCards={filterDoneCards(true)} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );
