@@ -10,7 +10,7 @@ const Card = props => {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
 
-  const butifiedDate = date ? new Date(date).toDateString() : '';
+  const beautifiedDate = date ? new Date(date).toDateString() : '';
 
   const onBtnClick = () => {
     dispatch(operations.updateTask({ isDone: !isDone, id: id }))
@@ -34,9 +34,31 @@ const Card = props => {
     e.dataTransfer.setData('card_id', e.target.id);
   };
 
+  const getBeautifiedDate = cardDate => {
+    const cardTimestamp =  new Date(cardDate);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today.getTime() - 86400000);
+    const tomorrow = new Date(today.getTime() + 86400000);
+    const dayAfterTomorrow = new Date(today.getTime() + 86400000 * 2);
+
+    if (cardTimestamp < yesterday) {
+      return beautifiedDate
+    } else if (cardTimestamp < today && cardTimestamp >= yesterday) {
+      return "Yesterday";
+    } else if (cardTimestamp < tomorrow && cardTimestamp >= today) {
+      return "Today";
+    } else if (cardTimestamp < dayAfterTomorrow && cardTimestamp >= tomorrow) {
+      return "Tomorrow";
+    } else if (cardTimestamp >= dayAfterTomorrow) {
+      return beautifiedDate;
+    }
+  };
+
+
   return <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onDragStart={draggable ? onDragStart : null} draggable={draggable} data-card={true} id={id} onClick={onCardClick} className={`${css.card} ${isButton ? '' : css.card_canban} card`}>
     {isHovered ? <img onClick={onDeleteCardClick} className={css.card__delete} width="15px" src={deleteSVG} alt={`delete task: ${title}`} /> : null}
-    <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{butifiedDate}</p>
+    <p className={`${css.card__date} ${isDone ? css.card__done : ''}`}>{getBeautifiedDate(date)}</p>
     <h2 className={`${css.card__title} ${isDone ? css.card__done : ''}`}>{title}</h2>
     <div className={css.card__note_wrapper}>
       <p className={`${css.card__note} ${isDone ? css.card__done : ''}`}>{text}</p>

@@ -5,7 +5,7 @@ import EditCard from '../../Card/EditCard.jsx';
 import NewCard from '../../NewCard/NewCard.jsx';
 
 const Block = props => {
-  const { title, allTags } = props;
+  const { title, allTags, date } = props;
 
   const [editCard, setEditCard] = useState({
     id: null,
@@ -14,7 +14,7 @@ const Block = props => {
 
   return (
     <div>
-      <h1 className={css.block__title}>{title}</h1>
+      <h1 className={css.block__title}>{title} <span className={css.block__date}>{date}</span></h1>
       <div className={css.block}>
       {title === "NO DATE" ? <NewCard allTags={allTags} /> : null}
       {props.cards.map((card, i) => {
