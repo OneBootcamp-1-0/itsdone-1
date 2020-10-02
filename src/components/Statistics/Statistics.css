@@ -1,5 +1,5 @@
 .statistics__inner {
-  display: none;
+  display: block;
   background-color: #333333;
   color: #f2f2f2;
   min-height: 270px;
