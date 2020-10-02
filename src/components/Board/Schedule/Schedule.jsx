@@ -28,13 +28,13 @@ const Schedule = props => {
         return cardTimestamp >= tomorrow && cardTimestamp < nextWeekStart;
       }
       if (block.title === "LATER THIS MONTH") {
-        return cardTimestamp >= nextWeekStart && cardTimestamp <= nextMonthStart;
+        return cardTimestamp >= nextWeekStart && cardTimestamp < nextMonthStart;
       }
       if (block.title === "UPCOMING MONTHS") {
-        return cardTimestamp > nextMonthStart;
+        return cardTimestamp >= nextMonthStart;
       }
     });
-  }
+  };
 
   const getToday = () => {
     const month = new Date().getMonth();
