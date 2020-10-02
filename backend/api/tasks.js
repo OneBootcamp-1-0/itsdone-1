@@ -39,7 +39,7 @@ router.patch('/:id', (req, res) => {
 
     data.tasks = data.tasks.map(task => {
       if (task.id === Number(req.params.id)) {
-        if (!newTask.status && newTask.isDone && newTask.isDone !== task.isDone) {
+        if (!newTask.status && (newTask.isDone === true || newTask.isDone === false) && newTask.isDone !== task.isDone) {
           newTask.status = newTask.isDone ? 'done' : 'toDo';
         }
         newTask = { ...task, ...newTask };
@@ -64,11 +64,9 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   try {
     const taskId = Number(req.params.id);
-    data.tasks = data.tasks.filter((task) => {
-      if (task.id !== taskId) {
-        return task
-      }
-    });
+
+    data.tasks.splice(taskId, 1);
+    data.tasks = data.tasks.map((task, i) => ({...task, id: i}));
 
     res.status(200).json({
       message: 'Task successfully deleted',
