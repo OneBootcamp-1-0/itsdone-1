@@ -110,7 +110,6 @@ const Statistics = props => {
               </li>
               <li>Tasks completed
                 <span>{statusesToQuantity['done']}</span>
-                <span>0</span>
                 <p>{getCompletedTaskPhrase()}</p>
               </li>
             </ul>
