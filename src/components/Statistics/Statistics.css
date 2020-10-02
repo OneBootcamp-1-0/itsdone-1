@@ -81,15 +81,15 @@
 }
 
 .indicators {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: max-content;
   list-style-type: none;
-  margin: 0;
-  margin-top: 15px;
+  margin: 15px 0 0 0;
   padding: 0;
-}
-
-.indicators li {
-  margin-right: 30px;
+  justify-content: start;
+  grid-column-gap: 30px;
+  justify-items: center;
 }
 
 .indicators span {
