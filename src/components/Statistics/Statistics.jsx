@@ -19,7 +19,6 @@ const Statistics = props => {
   const showStat = () => {
     statBlock.current.style.display = 'block';
     showStatBtn.current.style.display = 'none';
-    ratio.current.style.color = getColor();
   };
 
   const toggleRadioButtons = id => {
@@ -31,7 +30,7 @@ const Statistics = props => {
   };
 
   const completedNumber = filterCompleted();
-  const ratioCompleted = Math.round((completedNumber / cards.length) * 100);
+  const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
 
   const getColor = () => {
     return getValueFromObject(ratioCompleted, {
@@ -56,7 +55,7 @@ const Statistics = props => {
                 <li>Total <span>310</span></li>
               </ul>
             </li>
-            <li>Completed tasks ratio<span ref={ratio}>{ratioCompleted}%</span></li>
+            <li>Completed tasks ratio<span style={{color: getColor()}} ref={ratio}>{ratioCompleted}%</span></li>
           </ul>
           <div>
             <ul className={css.sorting__list}>
