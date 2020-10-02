@@ -25,7 +25,7 @@
 }
 
 .statistics__btn__show {
-  display: block;
+  display: none;
   color: #333333;
   margin: 0;
   margin-top: 20px;
