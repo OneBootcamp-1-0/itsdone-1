@@ -5,8 +5,8 @@ import css from './Schedule.css';
 const Schedule = props => {
   const { cards, allTags } = props;
 
-  const filterDateCards = (block) => {
-    return cards.filter((card) => {
+  const filterDateCards = block => {
+    return cards.filter(card => {
 
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -28,10 +28,10 @@ const Schedule = props => {
         return cardTimestamp >= tomorrow && cardTimestamp < nextWeekStart;
       }
       if (block.title === "LATER THIS MONTH") {
-        return cardTimestamp >= nextWeekStart && cardTimestamp <= nextMonthStart;
+        return cardTimestamp >= nextWeekStart && cardTimestamp < nextMonthStart;
       }
       if (block.title === "UPCOMING MONTHS") {
-        return cardTimestamp > nextMonthStart;
+        return cardTimestamp >= nextMonthStart;
       }
     });
   }
