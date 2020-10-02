@@ -61,8 +61,14 @@
 }
 
 .card__edit_note {
-  height: 80px;
+  height: 100px;
   margin-bottom: 10px;
+}
+
+.card__btn_group {
+  display: grid;
+  grid-auto-flow: column;
+  margin-top: auto;
 }
 
 .card__btn {

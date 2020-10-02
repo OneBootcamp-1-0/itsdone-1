@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer.jsx';
 import Canban from './components/Board/Canban/Canban.jsx';
 import Schedule from './components/Board/Schedule/Schedule.jsx';
 import Grid from './components/Board/Grid/Grid.jsx';
+import Statistics from './components/Statistics/Statistics.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
@@ -40,6 +41,31 @@ const App = () => {
     return allTags;
   };
 
+  const getValueFromObject = (value, values) => {
+    const res = Object.keys(values).find(item => {
+      if (value <= item) {
+        return item
+      }
+    });
+
+    return values[res];
+  };
+
+  const getCardsQuantityByStatuses = (cards) => {
+    const result = {
+      'toDo': 0,
+      'inProgress': 0,
+      'inTesting': 0,
+      'done': 0
+    };
+
+    cards.forEach(card => {
+      result[card.status] += 1;
+    })
+
+    return result;
+  }
+
   return (
     <div className={css.page}>
       <Header setShowAll={setShowAll} />
@@ -51,6 +77,7 @@ const App = () => {
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
+      <Statistics statusesToQuantity={getCardsQuantityByStatuses(cards)} cards={cards} getValueFromObject={getValueFromObject}/>
       <Footer />
     </div>
   );
