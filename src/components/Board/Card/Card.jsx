@@ -66,7 +66,7 @@ const Card = props => {
     <div className={css.btn__wrapper}>
       <div className={css.card__note_shadow}></div>
       <TagCloud tags={tags} />
-      {isButton ? <button className={css.card__btn} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
+      {isButton ? <button className={`${css.card__btn} ${isDone ? css.card__btn__mark : ''}`} type='button' onClick={onBtnClick}>{isDone ? 'NOTDONE!' : 'DONE!'}</button> : null}
     </div>
   </div>
 };

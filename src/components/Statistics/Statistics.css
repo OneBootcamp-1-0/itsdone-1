@@ -9,7 +9,7 @@
 .statistics__wrapper {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 200px 1fr;
   grid-column-gap: 100px;
 }
 

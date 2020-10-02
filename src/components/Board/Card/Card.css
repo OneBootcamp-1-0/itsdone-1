@@ -102,6 +102,20 @@
   outline: none;
   padding: 0;
   text-transform: uppercase;
+  position: relative;
+}
+
+.card__btn__mark::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% - 3px);
+  left: 48px;
+  width: 10px;
+  height: 7px;
+  border-bottom: 3px solid #27AE60;
+  border-left: 3px solid #27AE60;
+  transform: translate(-50%, -50%) rotate(-50deg);
 }
 
 .card__btn_cancel {
