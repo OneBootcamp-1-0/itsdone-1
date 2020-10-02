@@ -28,10 +28,31 @@ const Statistics = props => {
   const filterCompleted = () => {
     return cards.filter(card => card.isDone).length;
   };
+  
+  const filterTesting = () => {
+    return cards.filter(card => card.status === "inTesting").length;
+  };
 
   const completedNumber = filterCompleted();
-  const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
+  const testingNumber = filterTesting();
 
+  const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
+  const ratioInTesting = cards.length ? Math.round((testingNumber / cards.length) * 100) : 0;
+
+  const getCompletedTaskPhrase = () => {
+    return getValueFromObject(ratioCompleted, {
+      75: "",
+      100: "Nice job! Keep it up!"
+    });
+  };
+
+  const getBeingTestedTaskPhrase = () => {
+    return getValueFromObject(ratioInTesting, {
+      25: "You should probably go on and test something 💔",
+      100: ""
+    });
+  };
+  
   const getColor = () => {
     return getValueFromObject(ratioCompleted, {
       50: "#EB5757",
@@ -85,11 +106,11 @@ const Statistics = props => {
               </li>
               <li>Tasks being tested
                 <span>0</span>
-                <p>You should probably go on and test something 💔</p>
+                <p>{getBeingTestedTaskPhrase()}</p>
               </li>
               <li>Tasks completed
                 <span>12</span>
-                <p>Nice job! Keep it up!</p>
+                <p>{getCompletedTaskPhrase()}</p>
               </li>
             </ul>
           </div>
