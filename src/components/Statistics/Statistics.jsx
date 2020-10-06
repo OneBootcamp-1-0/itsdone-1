@@ -26,16 +26,9 @@ const Statistics = props => {
   const filterCompleted = () => {
     return cards.filter(card => card.isDone).length;
   };
-  
-  const filterTesting = () => {
-    return cards.filter(card => card.status === "inTesting").length;
-  };
 
   const completedNumber = filterCompleted();
-  const testingNumber = filterTesting();
-
   const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
-  const ratioInTesting = cards.length ? Math.round((testingNumber / cards.length) * 100) : 0;
 
   const getCompletedTaskPhrase = () => {
     return getValueFromObject(ratioCompleted, {
@@ -44,13 +37,6 @@ const Statistics = props => {
     });
   };
 
-  const getBeingTestedTaskPhrase = () => {
-    return getValueFromObject(ratioInTesting, {
-      25: "You should probably go on and test something 💔",
-      100: ""
-    });
-  };
-  
   const getColor = () => {
     return getValueFromObject(ratioCompleted, {
       50: "#EB5757",
@@ -104,7 +90,7 @@ const Statistics = props => {
               </li>
               <li>Tasks being tested
                 <span>{statusesToQuantity['inTesting']}</span>
-                 <p>{getBeingTestedTaskPhrase()}</p>
+                 <p>{cards.filter(card => card.status === "inTesting").length === 0 ? "You should probably go on and test something 💔" : null}</p>
               </li>
               <li>Tasks completed
                 <span>{statusesToQuantity['done']}</span>
