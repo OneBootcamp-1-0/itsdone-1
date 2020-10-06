@@ -27,6 +27,10 @@ const Statistics = props => {
     return cards.filter(card => card.isDone).length;
   };
 
+  const filterTesting = () => {
+    return cards.filter(card => card.status === "inTesting").length;
+  };
+
   const completedNumber = filterCompleted();
   const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
 
@@ -90,7 +94,7 @@ const Statistics = props => {
               </li>
               <li>Tasks being tested
                 <span>{statusesToQuantity['inTesting']}</span>
-                 <p>{cards.filter(card => card.status === "inTesting").length === 0 ? "You should probably go on and test something 💔" : null}</p>
+                 <p>{filterTesting() ? null : "You should probably go on and test something 💔"}</p>
               </li>
               <li>Tasks completed
                 <span>{statusesToQuantity['done']}</span>
