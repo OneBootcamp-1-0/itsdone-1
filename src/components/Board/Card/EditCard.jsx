@@ -72,7 +72,12 @@ const EditCard = props => {
 
   const onInputChange = (value, type) => {
     if (type === 'tags') {
-      const tagsNames = value.trim().split(' ');
+      const tagsNames = value.trim().split(' ').filter(tagName => {
+        if (tagName !== "") {
+          return tagName;
+        }
+      });
+
       const isValid = tagsNames.every(tagName => tagName.split('').splice(1).join('').length < 10);
 
       if (tagsNames.length > 5) {
