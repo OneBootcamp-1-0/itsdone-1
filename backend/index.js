@@ -4,17 +4,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-const PORT = 3000;
+let port = process.env.PORT;
+
+if (!port) {
+  port = 8000;
+}
 
 app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(404).json({
-    message: 'Not found' 
+    message: 'Not found'
   });
 });
 
 app.use('/tasks', tasks);
 
-app.listen(PORT);
+app.listen(port);
