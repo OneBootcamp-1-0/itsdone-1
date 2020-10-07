@@ -1,4 +1,4 @@
-const baseURL = 'https://murmuring-brushlands-70389.herokuapp.com/tasks';
+const baseURL = 'https://murmuring-brushlands-70389.herokuapp.com/tasks/';
 
 
 const tasksAPI = {
