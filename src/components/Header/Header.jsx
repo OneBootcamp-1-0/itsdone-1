@@ -31,7 +31,11 @@ const Header = (props) => {
       <div className={css.header__logo}>
         <img src={logo} width='172' height='48' alt='It`s done!'></img>
       </div>
-      {activeLink === 'canban' ? null : <button onClick={onButtonShowClick} type='button' className={css.button_show}>{showCompletedBtn ? 'Hide completed' : 'Show completed'}</button>}
+      {
+        activeLink === 'canban'
+          ? null
+          : <button onClick={onButtonShowClick} type='button' className={css.button_show}>{showCompletedBtn ? 'Hide completed' : 'Show completed'}</button>
+      }
       <div>
         <NavLink data-active-link={activeLink === 'grid' ? true : false} onClick={() => onNavLinkClick('grid')} className={`${css.nav_link} ${css.nav_link_active}`} to='/grid'>Grid</NavLink>
         <NavLink data-active-link={activeLink === 'canban' ? true : false} onClick={() => onNavLinkClick('canban')} className={css.nav_link} to='/canban'>Canban</NavLink>
