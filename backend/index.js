@@ -14,7 +14,6 @@ if (!port) {
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/../build')));
-console.log(path.join(__dirname, '/../build'));
 
 app.get('/', (req, res) => {
   res.status(404).json({
