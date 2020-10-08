@@ -3,7 +3,7 @@ import css from './NewCard.css';
 import EditCard from './../Card/EditCard.jsx'
 
 const NewCard = props => {
-  const { id, allTags } = props;
+  const { id, allTags, ws } = props;
 
   const [editCard, setEditCard] = useState({
     id: null,
@@ -20,7 +20,7 @@ const NewCard = props => {
   };
 
   return editCard.isEdit
-    ? <EditCard allTags={allTags} isNewCard={true} setEditCard={setEditCard} id={id} date='' title='' text='' tags={[]} />
+    ? <EditCard ws={ws} allTags={allTags} isNewCard={true} setEditCard={setEditCard} id={id} date='' title='' text='' tags={[]} />
     : <button className={css.new_card} onClick={onNewCardClick}>+ ADDNEW</button>
 
 };

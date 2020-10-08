@@ -6,7 +6,7 @@ import { operations } from '../../../redux/tasksReducer.js';
 import deleteSVG from '../../../assets/delete.svg';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, setEditCard, tags, draggable } = props;
+  const { isButton, date, title, text, isDone, id, setEditCard, tags, draggable, ws } = props;
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const Card = props => {
   };
 
   const onDeleteCardClick = () => {
-    dispatch(operations.deleteTask(id));
+    dispatch(operations.deleteTask(ws, id));
   }
 
   const onDragStart = e => {

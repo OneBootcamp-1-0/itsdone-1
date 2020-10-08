@@ -11,8 +11,10 @@ import Statistics from './components/Statistics/Statistics.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
+import {actions} from './redux/tasksReducer.js';
 
-const App = () => {
+const App = props => {
+  const { ws } = props;
   const [showAll, setShowAll] = useState(true);
   const [activeButton, setActiveButton] = useState('total');
 
@@ -21,10 +23,19 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    ws.onmessage = message => {
+      const cards = JSON.parse(message.data);
+      dispatch(actions.updateAllTasks(cards));
+    };
+
+    ws.onclose = () => {
+      console.log('Connection closed');
+    };
+
     dispatch(operations.requestTasks());
   }, []);
 
-  const filterDoneCards = (isDone) => {
+  const filterDoneCards = isDone => {
     return cards.filter(card => card.isDone === isDone);
   };
 
@@ -57,7 +68,7 @@ const App = () => {
     return cards.filter(card => {
 
       const now = new Date();
-      const cardTimestamp =  new Date(card.date);
+      const cardTimestamp = new Date(card.date);
 
       const currentWeekMondayIndex = now.getDate() - now.getDay() + 1;
       const prevWeekStartIndex = new Date().setDate(currentWeekMondayIndex - 7);
@@ -65,9 +76,9 @@ const App = () => {
       const prevWeekStart = new Date(prevWeekStartDate.getFullYear(), prevWeekStartDate.getMonth(), prevWeekStartDate.getDate());
       const prevWeekEnd = new Date(prevWeekStart.getTime() + 86400000 * 7);
 
-      const prevMonthStart = new Date(now.getFullYear(), now.getMonth()-1, 1);
-      const prevMonthEnd = new Date(now.getFullYear(), now.getMonth()-1, 31);
-      const prevYearStart = new Date(now.getFullYear()-1, 0, 1);;
+      const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const prevMonthEnd = new Date(now.getFullYear(), now.getMonth() - 1, 31);
+      const prevYearStart = new Date(now.getFullYear() - 1, 0, 1);;
       const prevYearEnd = new Date(now.getFullYear(), 0, 1);
 
       if (blockTitle === "lastweek") {
@@ -105,13 +116,13 @@ const App = () => {
       <Header setShowAll={setShowAll} />
       <Board>
         <Switch>
-          <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
-          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
+          <Route exact path="/canban" render={() => <Canban ws={ws} allTags={getAllTags()} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
+          <Route exact path="/schedule" render={() => <Schedule ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterDoneCards(false)} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics doneCards={filterDoneCards(true)} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject}/>
+      <Statistics doneCards={filterDoneCards(true)} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject} />
       <Footer />
     </div>
   );
