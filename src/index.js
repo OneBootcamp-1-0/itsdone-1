@@ -7,9 +7,10 @@ import { Provider } from 'react-redux';
 import store from './redux/store.js';
 
 const history = createBrowserHistory();
-let ws = new WebSocket('wss://murmuring-brushlands-70389.herokuapp.com/');
+let ws;
 
 const createWebSocketConnection = (onMessage, onClose) => {
+  ws = new WebSocket('wss://murmuring-brushlands-70389.herokuapp.com/');
   ws.onmessage = onMessage;
   ws.onclose = () => {
     ws = null;
