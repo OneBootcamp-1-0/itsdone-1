@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     const newTask = req.body;
     const tasks = data.tasks;
 
-    const newModifiedTask = { ...newTask, id: tasks.length, date: newTask.date ? new Date(newTask.date).toISOString() : '' };
+    const newModifiedTask = { ...newTask, id: tasks.length, isDone: false, date: newTask.date ? new Date(newTask.date).toISOString() : '' };
 
     tasks.push(newModifiedTask);
 
