@@ -22,7 +22,7 @@ wss.on('connection', ws => {
 });
 
 let port = process.env.PORT;
-
+console.log(port)
 if (!port) {
   port = 8080;
 }

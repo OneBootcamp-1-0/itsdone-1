@@ -13,7 +13,7 @@ const Card = props => {
   const beautifiedDate = date ? new Date(date).toDateString() : '';
 
   const onBtnClick = () => {
-    dispatch(operations.updateTask({ isDone: !isDone, id: id }))
+    dispatch(operations.updateTask(ws, { isDone: !isDone, id: id }))
   };
 
   const onCardClick = e => {
