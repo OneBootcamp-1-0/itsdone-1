@@ -14,7 +14,7 @@ import { operations } from './redux/tasksReducer.js';
 import {actions} from './redux/tasksReducer.js';
 
 const App = props => {
-  const { ws } = props;
+  const { ws, createWebSocketConnection } = props;
   const [showAll, setShowAll] = useState(true);
   const [activeButton, setActiveButton] = useState('total');
 
@@ -23,14 +23,17 @@ const App = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    ws.onmessage = message => {
+    const onMessage = message => {
       const cards = JSON.parse(message.data);
       dispatch(actions.updateAllTasks(cards));
     };
 
-    ws.onclose = () => {
+    const onClose = () => {
       console.log('Connection closed');
+      createWebSocketConnection(onMessage, onClose);
     };
+
+    createWebSocketConnection(onMessage, onClose);
 
     dispatch(operations.requestTasks());
   }, []);
