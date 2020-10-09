@@ -11,9 +11,10 @@ import Statistics from './components/Statistics/Statistics.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
-import { actions } from './redux/tasksReducer.js';
+import {actions} from './redux/tasksReducer.js';
 
-const App = () => {
+const App = props => {
+  const { ws, createWebSocketConnection } = props;
   const [showAll, setShowAll] = useState(true);
   const [activeButton, setActiveButton] = useState('total');
 
@@ -21,19 +22,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  let ws = new WebSocket('wss://murmuring-brushlands-70389.herokuapp.com/');
-
   useEffect(() => {
-    const createWebSocketConnection = (onMessage, onClose) => {
-      ws = new WebSocket('wss://murmuring-brushlands-70389.herokuapp.com/');
-
-      ws.onmessage = onMessage;
-      ws.onclose = () => {
-        ws = null;
-        onClose(onMessage);
-      }
-    };
-
     const onMessage = message => {
       const cards = JSON.parse(message.data);
       dispatch(actions.updateAllTasks(cards));
