@@ -13,7 +13,7 @@ const createWebSocketConnection = (onMessage, onClose) => {
   ws.onmessage = onMessage;
   ws.onclose = () => {
     ws = null;
-    onClose();
+    onClose(onMessage);
   }
 };
 

@@ -28,7 +28,7 @@ const App = props => {
       dispatch(actions.updateAllTasks(cards));
     };
 
-    const onClose = () => {
+    const onClose = (onMessage) => {
       console.log('Connection closed');
       createWebSocketConnection(onMessage, onClose);
     };
