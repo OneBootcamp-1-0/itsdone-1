@@ -31,16 +31,18 @@ const Statistics = props => {
   const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
 
   const getCompletedTaskPhrase = () => {
-    return getValueFromObject(ratioCompleted, {
-      75: "",
-      100: "Nice job! Keep it up!"
-    });
+    const sum = statusesToQuantity['toDo'] + statusesToQuantity['inProgress'] + statusesToQuantity['inTesting'] + statusesToQuantity['done'];
+    const breakPoint = sum * 0.75;
+    if (statusesToQuantity['done'] > breakPoint) {
+      return "Nice job! Keep it up!"
+    }
   };
 
   const getTestingTaskPhrase = () => {
     if (statusesToQuantity['inTesting'] === 0 && activeButton === 'total') {
-     return "You should probably go on and test something 💔" }
-  }
+     return "You should probably go on and test something 💔"
+    }
+  };
 
 
   const getColor = () => {
