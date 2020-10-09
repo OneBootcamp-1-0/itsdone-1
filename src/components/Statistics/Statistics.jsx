@@ -27,19 +27,23 @@ const Statistics = props => {
     return cards.filter(card => card.isDone).length;
   };
 
-  const filterTesting = () => {
-    return cards.filter(card => card.status === "inTesting").length;
-  };
-
   const completedNumber = filterCompleted();
   const ratioCompleted = cards.length ? Math.round((completedNumber / cards.length) * 100) : 0;
 
   const getCompletedTaskPhrase = () => {
-    return getValueFromObject(ratioCompleted, {
-      75: "",
-      100: "Nice job! Keep it up!"
-    });
+    const sum = statusesToQuantity['toDo'] + statusesToQuantity['inProgress'] + statusesToQuantity['inTesting'] + statusesToQuantity['done'];
+    const breakPoint = sum * 0.75;
+    if (statusesToQuantity['done'] > breakPoint) {
+      return "Nice job! Keep it up!"
+    }
   };
+
+  const getTestingTaskPhrase = () => {
+    if (statusesToQuantity['inTesting'] === 0 && activeButton === 'total') {
+     return "You should probably go on and test something 💔"
+    }
+  };
+
 
   const getColor = () => {
     return getValueFromObject(ratioCompleted, {
@@ -94,7 +98,7 @@ const Statistics = props => {
               </li>
               <li>Tasks being tested
                 <span>{statusesToQuantity['inTesting']}</span>
-                 <p>{filterTesting() ? null : "You should probably go on and test something 💔"}</p>
+                 <p>{getTestingTaskPhrase()}</p>
               </li>
               <li>Tasks completed
                 <span>{statusesToQuantity['done']}</span>
