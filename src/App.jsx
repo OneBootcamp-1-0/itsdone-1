@@ -24,8 +24,12 @@ const App = () => {
     dispatch(operations.requestTasks());
   }, []);
 
-  const filterNotDoneCards = (isDone) => {
-    return cards.filter(card => card.isDone != isDone);
+  const filterNotDoneCards = () => {
+    return cards.filter(card => card.isDone == false);
+  };
+
+  const filterDoneCards = () => {
+    return cards.filter(card => card.isDone == true);
   };
 
   const getAllTags = () => {
@@ -106,12 +110,12 @@ const App = () => {
       <Board>
         <Switch>
           <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards(true)} />} />
-          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards(true)} />} />
+          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
-      <Statistics doneCards={filterNotDoneCards(true)} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject} />
+      <Statistics doneCards={filterDoneCards()} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject} />
       <Footer />
     </div>
   );
