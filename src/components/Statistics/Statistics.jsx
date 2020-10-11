@@ -13,7 +13,6 @@ const Statistics = props => {
     showStatBtn.current.style.display = 'block';
   };
 
-
   const showStat = () => {
     statBlock.current.style.display = 'block';
     showStatBtn.current.style.display = 'none';
