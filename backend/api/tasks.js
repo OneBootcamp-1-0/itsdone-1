@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     const newTask = req.body;
     const tasks = data.tasks;
 
-    const newModifiedTask = { ...newTask, id: tasks.length, date: newTask.date ? new Date(newTask.date).toISOString() : '' };
+    const newModifiedTask = { ...newTask, id: tasks.length, isDone: false, date: newTask.date ? new Date(newTask.date).toISOString() : '' };
 
     tasks.push(newModifiedTask);
 
@@ -39,7 +39,8 @@ router.patch('/:id', (req, res) => {
 
     data.tasks = data.tasks.map(task => {
       if (task.id === Number(req.params.id)) {
-        if (!newTask.status && newTask.isDone && newTask.isDone !== task.isDone) {
+        const isDonePropEmpty = newTask.isDone === undefined;
+        if (!newTask.status && !isDonePropEmpty && newTask.isDone !== task.isDone) {
           newTask.status = newTask.isDone ? 'done' : 'toDo';
         }
         newTask = { ...task, ...newTask };
@@ -60,5 +61,24 @@ router.patch('/:id', (req, res) => {
     });
   }
 });
+
+router.delete('/:id', (req, res) => {
+  try {
+    const taskId = Number(req.params.id);
+
+    data.tasks.splice(taskId, 1);
+    data.tasks = data.tasks.map((task, i) => ({...task, id: i}));
+
+    res.status(200).json({
+      message: 'Task successfully deleted',
+      deletedTaskId: taskId
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error'
+    });
+  }
+});
+
 
 module.exports = router;

@@ -5,7 +5,7 @@ import EditCard from '../../Card/EditCard.jsx';
 import NewCard from '../../NewCard/NewCard.jsx';
 
 const Block = props => {
-  const { title } = props;
+  const { title, allTags, date } = props;
 
   const [editCard, setEditCard] = useState({
     id: null,
@@ -14,12 +14,12 @@ const Block = props => {
 
   return (
     <div>
-      <h1 className={css.block__title}>{title}</h1>
+      <h1 className={css.block__title}>{title} <span className={css.block__date}>{date}</span></h1>
       <div className={css.block}>
-      {title === "NO DATE" ? <NewCard /> : null}
+      {title === "NO DATE" ? <NewCard allTags={allTags} /> : null}
       {props.cards.map((card, i) => {
         if (card.id === editCard.id && editCard.isEdit) {
-          return <EditCard key={i} setEditCard={setEditCard} id={card.id} date={card.date} title={card.title} text={card.text} tags={card.tags} />
+          return <EditCard allTags={allTags} key={i} setEditCard={setEditCard} id={card.id} date={card.date} title={card.title} text={card.text} tags={card.tags} />
         }
         return <GridCard setEditCard={setEditCard} id={card.id} key={i} isDone={card.isDone} date={card.date} title={card.title} text={card.text} tags={card.tags} />
       })}

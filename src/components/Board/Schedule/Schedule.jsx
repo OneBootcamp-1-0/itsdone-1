@@ -3,10 +3,10 @@ import Block from './Block/Block.jsx';
 import css from './Schedule.css';
 
 const Schedule = props => {
-  const { cards } = props;
+  const { cards, allTags } = props;
 
-  const filterDateCards = (block) => {
-    return cards.filter((card) => {
+  const filterDateCards = block => {
+    return cards.filter(card => {
 
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -28,13 +28,22 @@ const Schedule = props => {
         return cardTimestamp >= tomorrow && cardTimestamp < nextWeekStart;
       }
       if (block.title === "LATER THIS MONTH") {
-        return cardTimestamp >= nextWeekStart && cardTimestamp <= nextMonthStart;
+        return cardTimestamp >= nextWeekStart && cardTimestamp < nextMonthStart;
       }
       if (block.title === "UPCOMING MONTHS") {
-        return cardTimestamp > nextMonthStart;
+        return cardTimestamp >= nextMonthStart;
       }
     });
-  }
+  };
+
+  const getToday = () => {
+    const month = new Date().getMonth();
+    const day = new Date().getDate();
+    const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+    const textMonth = months[month];
+    return textMonth + ' ' + day;
+  };
+
 
   const blocks = [
     {
@@ -60,7 +69,8 @@ const Schedule = props => {
   return (
     <div className={css.schedule}>
       {blocks.map((block, i) => {
-        return <Block cards={filterDateCards(block)} key={i} title={block.title} />
+        if ((filterDateCards(block).length >= 1) || (block.title === "NO DATE"))
+          return <Block allTags={allTags} cards={filterDateCards(block)} key={i} title={block.title} date={block.title === "TODAY" ? getToday() : null } />
       })}
     </div>
   );

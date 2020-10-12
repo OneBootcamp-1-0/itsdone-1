@@ -9,8 +9,8 @@
     "start.ui": "webpack-dev-server --open --mode development --history-api-fallback",
     "start.backend": "node backend/index.js",
     "start.backend.dev": "nodemon backend/index.js",
-    "start": "concurrently \"npm:start.backend\" \"npm:start.ui\"",
-    "deploy": "git push heroku $(git branch --show-current):master"
+    "deploy": "git push heroku $(git branch --show-current):master",
+    "start": "node backend/index.js"
   },
   "repository": {
     "type": "git",
