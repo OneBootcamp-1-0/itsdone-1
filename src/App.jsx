@@ -11,6 +11,7 @@ import Statistics from './components/Statistics/Statistics.jsx';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
+import Favicon from 'react-favicon';
 
 const App = () => {
   const [showAll, setShowAll] = useState(true);
@@ -106,6 +107,7 @@ const App = () => {
 
   return (
     <div className={css.page}>
+      <Favicon url="./src/assets/favicon.ico"/>
       <Header setShowAll={setShowAll} />
       <Board>
         <Switch>
