@@ -23,7 +23,16 @@ const tasksAPI = {
     return fetch(`${baseURL}${taskId}`, {
       method: 'DELETE'
     }).then(res => res.json()).then(data => data.deletedTaskId)
-  }
+  },
+  updateTasksWS: function(ws, message) {
+    if (!ws.readyState) {
+      setTimeout(() => {
+        this.updateTasksWS(ws, message);
+      }, 100);
+    } else {
+      ws.send(message);
+    }
+  },
 };
 
 export default tasksAPI;

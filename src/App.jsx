@@ -12,8 +12,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
 import Favicon from 'react-favicon';
+import { actions } from './redux/tasksReducer.js';
 
-const App = () => {
+const App = props => {
+  const { ws, createWebSocketConnection } = props;
   const [showAll, setShowAll] = useState(true);
   const [activeButton, setActiveButton] = useState('total');
 
@@ -22,6 +24,18 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const onMessage = message => {
+      const cards = JSON.parse(message.data);
+      dispatch(actions.updateAllTasks(cards));
+    };
+
+    const onClose = (onMessage) => {
+      console.log('Connection closed');
+      createWebSocketConnection(onMessage, onClose);
+    };
+
+    createWebSocketConnection(onMessage, onClose);
+
     dispatch(operations.requestTasks());
   }, []);
 
@@ -107,19 +121,18 @@ const App = () => {
 
   return (
     <div className={css.page}>
-      <Favicon url="./src/assets/favicon.ico"/>
+      <Favicon url="./src/assets/favicon.ico" />
       <Header setShowAll={setShowAll} />
       <Board>
         <Switch>
-          <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
-          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
+          <Route exact path="/canban" render={() => <Canban ws={ws} allTags={getAllTags()} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>
       <Statistics doneCards={filterDoneCards()} filterDateTasks={filterDateTasks} setActiveButton={setActiveButton} activeButton={activeButton} filterCards={filterDateTasks(cards)} statusesToQuantity={getCardsQuantityByStatuses(filterDateTasks(cards, activeButton))} cards={cards} getValueFromObject={getValueFromObject} />
-      <Footer />
-    </div>
+    </div >
   );
 };
 

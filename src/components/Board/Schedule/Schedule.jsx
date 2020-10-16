@@ -3,7 +3,7 @@ import Block from './Block/Block.jsx';
 import css from './Schedule.css';
 
 const Schedule = props => {
-  const { cards, allTags } = props;
+  const { cards, allTags, ws } = props;
 
   const filterDateCards = block => {
     return cards.filter(card => {
@@ -70,7 +70,7 @@ const Schedule = props => {
     <div className={css.schedule}>
       {blocks.map((block, i) => {
         if ((filterDateCards(block).length >= 1) || (block.title === "NO DATE"))
-          return <Block allTags={allTags} cards={filterDateCards(block)} key={i} title={block.title} date={block.title === "TODAY" ? getToday() : null } />
+          return <Block ws={ws} allTags={allTags} cards={filterDateCards(block)} key={i} title={block.title} date={block.title === "TODAY" ? getToday() : null } />
       })}
     </div>
   );
