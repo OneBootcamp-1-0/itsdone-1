@@ -1,5 +1,4 @@
-const baseURL = 'https://murmuring-brushlands-70389.herokuapp.com/tasks/';
-
+const baseURL = `${URL}/tasks/`;
 
 const tasksAPI = {
   getTasks: () => {
@@ -24,7 +23,7 @@ const tasksAPI = {
       method: 'DELETE'
     }).then(res => res.json()).then(data => data.deletedTaskId)
   },
-  updateTasksWS: function(ws, message) {
+  updateTasksWS: function (ws, message) {
     if (!ws.readyState) {
       setTimeout(() => {
         this.updateTasksWS(ws, message);
