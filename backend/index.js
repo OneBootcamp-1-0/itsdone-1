@@ -13,7 +13,7 @@ const wss = new webSocket.Server({ server });
 
 wss.on('connection', ws => {
   ws.on('error', err => {
-    console.error(err)
+    console.error(err);
   });
 
   ws.on('message', () => {
@@ -24,7 +24,7 @@ wss.on('connection', ws => {
 let port = process.env.PORT;
 
 if (!port) {
-  port = 8080;
+  port = 3030;
 }
 
 app.use(bodyParser.json());
@@ -84,7 +84,7 @@ app.patch('/tasks/:id', (req, res) => {
       }
       return task;
     });
-
+    console.log(newTask, data)
     res.status(200).json({
       message: 'Task successfully updated',
       updatedTask: newTask
