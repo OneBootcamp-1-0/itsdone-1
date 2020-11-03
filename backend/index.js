@@ -9,7 +9,10 @@ const data = require('./data.json');
 const app = express();
 const server = http.createServer(app);
 
-const wss = new webSocket.Server({ server });
+const wss = new webSocket.Server({
+  server,
+  keepalive: true,
+});
 
 wss.on('connection', ws => {
   ws.on('error', err => {
