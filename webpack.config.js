@@ -1,15 +1,16 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
-    publicPath:'/',
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   devServer: {
-    publicPath:'/',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -38,5 +39,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebPackPlugin({ template: "./src/index.html" })]
+  plugins: [
+    new HtmlWebPackPlugin({ template: "./src/index.html" }),
+    new webpack.DefinePlugin({
+      URL: JSON.stringify('http://www.itsdone.ru'),
+      WEBSOCKET_URL: JSON.stringify('ws://www.itsdone.ru'),
+    }),
+  ]
 };
