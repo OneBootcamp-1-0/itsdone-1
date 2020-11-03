@@ -43,7 +43,7 @@ module.exports = {
     new HtmlWebPackPlugin({ template: "./src/index.html" }),
     new webpack.DefinePlugin({
       URL: JSON.stringify('http://www.itsdone.ru'),
-      WEBSOCKET_URL: JSON.stringify('ws://www.itsdone.ru'),
+      WEBSOCKET_URL: JSON.stringify('wss://murmuring-brushlands-70389.herokuapp.com/'),
     }),
   ]
 };
