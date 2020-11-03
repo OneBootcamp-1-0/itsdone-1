@@ -4,7 +4,7 @@ import { operations } from '../../../redux/tasksReducer';
 import css from './Card.css';
 
 const EditCard = props => {
-  const { date, title, text, tags, id, setEditCard, isNewCard, allTags, ws } = props;
+  const { date, title, text, tags, id, setEditCard, isNewCard, allTags } = props;
   const [formVal, setFormVal] = useState({
     date: date,
     title: title,
@@ -59,9 +59,9 @@ const EditCard = props => {
       });
 
     if (isNewCard) {
-      dispatch(operations.addTask(ws, { ...formVal, tags: formVal.tags.length ? newTags : {}, status: 'toDo' }));
+      dispatch(operations.addTask({ ...formVal, tags: formVal.tags.length ? newTags : {}, status: 'toDo' }));
     } else {
-      dispatch(operations.updateTask(ws, { id: id, ...formVal, tags: formVal.tags.length ? newTags : {} }));
+      dispatch(operations.updateTask({ id: id, ...formVal, tags: formVal.tags.length ? newTags : {} }));
     }
 
     setEditCard({

@@ -6,14 +6,14 @@ import { operations } from '../../../redux/tasksReducer.js';
 import deleteSVG from '../../../assets/delete.svg';
 
 const Card = props => {
-  const { isButton, date, title, text, isDone, id, setEditCard, tags, draggable, ws } = props;
+  const { isButton, date, title, text, isDone, id, setEditCard, tags, draggable } = props;
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
 
   const beautifiedDate = date ? new Date(date).toDateString() : '';
 
   const onBtnClick = () => {
-    dispatch(operations.updateTask(ws, { isDone: !isDone, id: id }))
+    dispatch(operations.updateTask({ isDone: !isDone, id: id }))
   };
 
   const onCardClick = e => {
@@ -26,7 +26,7 @@ const Card = props => {
   };
 
   const onDeleteCardClick = () => {
-    dispatch(operations.deleteTask(ws, id));
+    dispatch(operations.deleteTask(id));
   }
 
   const onDragStart = e => {
@@ -35,7 +35,7 @@ const Card = props => {
   };
 
   const getBeautifiedDate = cardDate => {
-    const cardTimestamp =  new Date(cardDate);
+    const cardTimestamp = new Date(cardDate);
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const yesterday = new Date(today.getTime() - 86400000);
