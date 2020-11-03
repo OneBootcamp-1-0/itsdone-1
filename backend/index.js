@@ -13,6 +13,7 @@ const wss = new webSocket.Server({
   server,
   keepalive: true,
   keepaliveGracePeriod: 6000 * 100, // ms
+  dropConnectionOnKeepaliveTimeout: false,
 });
 
 wss.on('connection', ws => {
