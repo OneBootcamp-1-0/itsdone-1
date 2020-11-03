@@ -89,7 +89,7 @@ app.patch('/tasks/:id', (req, res) => {
       }
       return task;
     });
-    console.log(newTask, data)
+
     res.status(200).json({
       message: 'Task successfully updated',
       updatedTask: newTask
