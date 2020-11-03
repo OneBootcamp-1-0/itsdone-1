@@ -54,6 +54,7 @@ export const operations = {
       };
 
       const onClose = () => {
+        console.log('connection closed');
         dispatch(actions.updateAllTasks([]));
       };
 
