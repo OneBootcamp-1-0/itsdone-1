@@ -1,5 +1,5 @@
 import tasksAPI from '../api/tasksAPI.js';
-import myWebSocket from '../ws/ws.js';
+import WebSocketTemplate from '../webSocket/WebSocketTemplate.js';
 
 const ADD_TASK = 'ADD_NEW_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
@@ -46,7 +46,7 @@ export const actions = {
 export const operations = {
   initWS() {
     return dispatch => {
-      const CardsWebSocket = new myWebSocket();
+      const CardsWebSocket = new WebSocketTemplate();
 
       const onMessage = message => {
         const cards = JSON.parse(message.data);

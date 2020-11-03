@@ -1,4 +1,4 @@
-export default class myWebSocket {
+export default class WebSocketTemplate {
   constructor() {
     this.ws = null;
   }
