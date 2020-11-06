@@ -46,7 +46,7 @@ export const actions = {
 export const operations = {
   initWS() {
     return dispatch => {
-      const CardsWebSocket = new WebSocketTemplate();
+      const cardsWebSocket = new WebSocketTemplate();
 
       const onMessage = message => {
         const cards = JSON.parse(message.data);
@@ -58,10 +58,10 @@ export const operations = {
       };
 
       const onOpen = () => {
-        ws = CardsWebSocket.ws;
+        ws = cardsWebSocket.ws;
       };
 
-      CardsWebSocket.connect(WEBSOCKET_URL, onMessage, onOpen, onClose);
+      cardsWebSocket.connect(WEBSOCKET_URL, onMessage, onOpen, onClose);
     }
   },
   requestTasks: () => {
