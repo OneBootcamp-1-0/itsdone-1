@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const wss = new webSocket.Server({
   server,
   keepalive: true,
-  keepaliveGracePeriod: 6000 * 100, // ms
+  keepaliveGracePeriod: 6 * 100 * 1000, // ms
   dropConnectionOnKeepaliveTimeout: false,
 });
 
