@@ -1,10 +1,13 @@
 import tasksAPI from '../api/tasksAPI.js';
+import WebSocketTemplate from '../webSocket/WebSocketTemplate.js';
 
 const ADD_TASK = 'ADD_NEW_TASK';
 const UPDATE_TASK = 'UPDATE_TASK';
 const SET_TASKS = 'SET_TASKS';
 const DELETE_TASK = 'DELETE_TASK';
 const UPDATE_ALL_TASKS = 'UPDATE_ALL_TASKS';
+
+let ws = null;
 
 const initialState = {
   tasks: []
@@ -41,6 +44,26 @@ export const actions = {
 };
 
 export const operations = {
+  initWS() {
+    return dispatch => {
+      const cardsWebSocket = new WebSocketTemplate();
+
+      const onMessage = message => {
+        const cards = JSON.parse(message.data);
+        dispatch(actions.updateAllTasks(cards));
+      };
+
+      const onClose = () => {
+        console.log('connection closed');
+      };
+
+      const onOpen = () => {
+        ws = cardsWebSocket.ws;
+      };
+
+      cardsWebSocket.connect(WEBSOCKET_URL, onMessage, onOpen, onClose);
+    }
+  },
   requestTasks: () => {
     return dispatch => {
       tasksAPI
@@ -48,7 +71,7 @@ export const operations = {
         .then(tasks => dispatch(actions.setTasks(tasks)));
     };
   },
-  addTask: (ws, task) => {
+  addTask: task => {
     return dispatch => {
       tasksAPI
         .addTask(task)
@@ -56,7 +79,7 @@ export const operations = {
         .then(() => tasksAPI.updateTasksWS(ws, 'Update task'));
     };
   },
-  updateTask: (ws, task) => {
+  updateTask: task => {
     return dispatch => {
       tasksAPI
         .updateTask(task)
@@ -64,7 +87,7 @@ export const operations = {
         .then(() => tasksAPI.updateTasksWS(ws, 'Update task'));
     };
   },
-  deleteTask: (ws, taskId) => {
+  deleteTask: taskId => {
     return dispatch => {
       tasksAPI
         .deleteTask(taskId)

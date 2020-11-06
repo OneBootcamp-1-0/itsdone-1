@@ -3,7 +3,6 @@ import './index.css';
 import css from './App.css';
 import Header from './components/Header/Header.jsx';
 import Board from './components/Board/Board.jsx';
-import Footer from './components/Footer/Footer.jsx';
 import Canban from './components/Board/Canban/Canban.jsx';
 import Schedule from './components/Board/Schedule/Schedule.jsx';
 import Grid from './components/Board/Grid/Grid.jsx';
@@ -12,10 +11,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { operations } from './redux/tasksReducer.js';
 import Favicon from 'react-favicon';
-import { actions } from './redux/tasksReducer.js';
 
-const App = props => {
-  const { ws, createWebSocketConnection } = props;
+const App = () => {
   const [showAll, setShowAll] = useState(true);
   const [activeButton, setActiveButton] = useState('total');
 
@@ -24,18 +21,6 @@ const App = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const onMessage = message => {
-      const cards = JSON.parse(message.data);
-      dispatch(actions.updateAllTasks(cards));
-    };
-
-    const onClose = (onMessage) => {
-      console.log('Connection closed');
-      createWebSocketConnection(onMessage, onClose);
-    };
-
-    createWebSocketConnection(onMessage, onClose);
-
     dispatch(operations.requestTasks());
   }, []);
 
@@ -83,7 +68,6 @@ const App = props => {
       const prevWeekStartDate = new Date(prevWeekStartIndex);
       const prevWeekStart = new Date(prevWeekStartDate.getFullYear(), prevWeekStartDate.getMonth(), prevWeekStartDate.getDate());
       const prevWeekEnd = new Date(prevWeekStart.getTime() + 86400000 * 7);
-
       const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
       const prevMonthEnd = new Date(now.getFullYear(), now.getMonth() - 1, 31);
       const prevYearStart = new Date(now.getFullYear() - 1, 0, 1);;
@@ -125,9 +109,9 @@ const App = props => {
       <Header setShowAll={setShowAll} />
       <Board>
         <Switch>
-          <Route exact path="/canban" render={() => <Canban ws={ws} allTags={getAllTags()} cards={cards} />} />
-          <Route exact path="/grid" render={() => <Grid ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
-          <Route exact path="/schedule" render={() => <Schedule ws={ws} allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
+          <Route exact path="/canban" render={() => <Canban allTags={getAllTags()} cards={cards} />} />
+          <Route exact path="/grid" render={() => <Grid allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
+          <Route exact path="/schedule" render={() => <Schedule allTags={getAllTags()} cards={showAll ? cards : filterNotDoneCards()} />} />
           <Route path="/" render={() => <Redirect to="/grid" />} />
         </Switch>
       </Board>

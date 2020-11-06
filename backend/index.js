@@ -9,11 +9,16 @@ const data = require('./data.json');
 const app = express();
 const server = http.createServer(app);
 
-const wss = new webSocket.Server({ server });
+const wss = new webSocket.Server({
+  server,
+  keepalive: true,
+  keepaliveGracePeriod: 6 * 100 * 1000, // ms
+  dropConnectionOnKeepaliveTimeout: false,
+});
 
 wss.on('connection', ws => {
   ws.on('error', err => {
-    console.error(err)
+    console.error(err);
   });
 
   ws.on('message', () => {
@@ -24,7 +29,7 @@ wss.on('connection', ws => {
 let port = process.env.PORT;
 
 if (!port) {
-  port = 8080;
+  port = 3030;
 }
 
 app.use(bodyParser.json());
